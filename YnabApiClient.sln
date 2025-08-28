@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmazur.YnabApiClient", "src\mmazur.YnabApiClient\mmazur.YnabApiClient.csproj", "{4B3E8189-84E7-4B7D-9F8B-18046EADA40F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{60B326AD-C1D7-4181-BFB2-940E77160D71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmazur.YnabApiClient.Samples", "samples\mmazur.YnabApiClient.Samples\mmazur.YnabApiClient.Samples.csproj", "{47A9F7AC-7736-465F-86BB-0F6C2A2B4090}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1774FD9F-613D-4C28-8892-F9282EC6C8A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmazur.YnabApiClient.UnitTests", "tests\mmazur.YnabApiClient.UnitTests\mmazur.YnabApiClient.UnitTests.csproj", "{59AAD2D8-4C68-427A-B243-0660F76AF6DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmazur.YnabApiClient.IntegrationTests", "tests\mmazur.YnabApiClient.IntegrationTests\mmazur.YnabApiClient.IntegrationTests.csproj", "{04B412BD-2832-40F1-AFB3-72296B2527C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B3E8189-84E7-4B7D-9F8B-18046EADA40F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B3E8189-84E7-4B7D-9F8B-18046EADA40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B3E8189-84E7-4B7D-9F8B-18046EADA40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B3E8189-84E7-4B7D-9F8B-18046EADA40F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A9F7AC-7736-465F-86BB-0F6C2A2B4090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A9F7AC-7736-465F-86BB-0F6C2A2B4090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A9F7AC-7736-465F-86BB-0F6C2A2B4090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A9F7AC-7736-465F-86BB-0F6C2A2B4090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59AAD2D8-4C68-427A-B243-0660F76AF6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59AAD2D8-4C68-427A-B243-0660F76AF6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59AAD2D8-4C68-427A-B243-0660F76AF6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59AAD2D8-4C68-427A-B243-0660F76AF6DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B412BD-2832-40F1-AFB3-72296B2527C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B412BD-2832-40F1-AFB3-72296B2527C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B412BD-2832-40F1-AFB3-72296B2527C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B412BD-2832-40F1-AFB3-72296B2527C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B3E8189-84E7-4B7D-9F8B-18046EADA40F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{47A9F7AC-7736-465F-86BB-0F6C2A2B4090} = {60B326AD-C1D7-4181-BFB2-940E77160D71}
+		{59AAD2D8-4C68-427A-B243-0660F76AF6DC} = {1774FD9F-613D-4C28-8892-F9282EC6C8A8}
+		{04B412BD-2832-40F1-AFB3-72296B2527C2} = {1774FD9F-613D-4C28-8892-F9282EC6C8A8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6CD9EB7-36EE-4EB1-93C9-C412FAF7074F}
+	EndGlobalSection
+EndGlobal
