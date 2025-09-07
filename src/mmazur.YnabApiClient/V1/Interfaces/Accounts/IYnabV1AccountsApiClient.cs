@@ -29,8 +29,8 @@ public interface IYnabV1AccountsApiClient
     /// Create a new account
     /// Creates a new account
     /// </summary>
-    /// <param name="createAccount">The account to create.</param>
+    /// <param name="account">The account to create.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<AccountResponse> CreateAsync(CreateAccount createAccount, CancellationToken cancellationToken = default);
+    Task<AccountResponse> CreateAsync(CreateAccount account, CancellationToken cancellationToken = default);
 }

@@ -21,6 +21,6 @@ internal sealed class YnabV1AccountsApiClient(IHttpClientFactory httpClientFacto
     public Task<AccountsResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
         this.GetAsync<AccountsResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 
-    public Task<AccountResponse> CreateAsync(CreateAccount createAccount, CancellationToken cancellationToken = default) =>
-        this.PostAsync<AccountResponse>(_resourcesUri, new CreateAccountRequest { CreateAccount = createAccount }, bearerToken, cancellationToken);
+    public Task<AccountResponse> CreateAsync(CreateAccount account, CancellationToken cancellationToken = default) =>
+        this.PostAsync<AccountResponse>(_resourcesUri, new CreateAccountRequest { Account = account }, bearerToken, cancellationToken);
 }
