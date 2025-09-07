@@ -11,10 +11,10 @@ dotnet_style_qualification_for_method = true:suggestion
 dotnet_style_qualification_for_property = true:suggestion
 
 # ReSharper properties
-resharper_blank_lines_after_multiline_statements = 1
+resharper_blank_lines_after_multiline_statements = 0
 resharper_blank_lines_around_single_line_field = 0
 resharper_blank_lines_around_single_line_property = 1
-resharper_blank_lines_before_block_statements = 1
+resharper_blank_lines_before_block_statements = 0
 resharper_csharp_blank_lines_around_single_line_field = 0
 resharper_keep_existing_initializer_arrangement = true
 resharper_method_or_operator_body = expression_body
@@ -56,6 +56,7 @@ csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_inlined_variable_declaration = true:suggestion
 csharp_space_around_binary_operators = before_and_after
 csharp_style_deconstructed_variable_declaration = true:suggestion
+resharper_wrap_ternary_expr_style = chop_always
 
 [*.{cs,vb}]
 #### Naming styles ####

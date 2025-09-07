@@ -1,4 +1,6 @@
-﻿namespace mmazur.YnabApiClient.Sample;
+﻿#pragma warning disable CA1826 // Do not use Enumerable methods on indexable collections
+
+namespace mmazur.YnabApiClient.Sample;
 
 internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
 {
@@ -38,5 +40,20 @@ internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
         var payeesResponse = await ynabApiClient.V1.Budgets[testBudget.Id].Payees.GetAsync(cancellationToken);
         Console.WriteLine(payeesResponse.Payees);
         Console.WriteLine();
+
+        var payee = payeesResponse.Payees.FirstOrDefault();
+        var payeeLocationsResponse = payee is null
+            ? await ynabApiClient.V1.Budgets[testBudget.Id].PayeeLocations.GetAsync(cancellationToken)
+            : await ynabApiClient.V1.Budgets[testBudget.Id].Payees[payee.Id].Locations.GetAsync(cancellationToken);
+        Console.WriteLine(payeeLocationsResponse.PayeeLocations);
+        Console.WriteLine();
+
+        var payeeLocation = payeeLocationsResponse.PayeeLocations.FirstOrDefault();
+        if (payeeLocation is not null)
+        {
+            var payeeLocationResponse = await ynabApiClient.V1.Budgets[testBudget.Id].PayeeLocations[payeeLocation.Id].GetAsync(cancellationToken);
+            Console.WriteLine(payeeLocationResponse.PayeeLocation);
+            Console.WriteLine();
+        }
     }
 }
