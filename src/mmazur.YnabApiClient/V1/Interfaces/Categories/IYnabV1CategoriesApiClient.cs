@@ -1,0 +1,27 @@
+﻿#pragma warning disable CA1043 // Use integral or string argument for indexers
+
+using mmazur.YnabApiClient.V1.Models.Categories;
+
+namespace mmazur.YnabApiClient.V1.Interfaces.Categories;
+
+public interface IYnabV1CategoriesApiClient
+{
+    IYnabV1CategoryApiClient this[Guid categoryId] { get; }
+
+    /// <summary>
+    /// List categories
+    /// Returns all categories grouped by category group. Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<CategoryGroupWithCategoriesResponse> GetAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// List categories
+    /// Returns all categories grouped by category group. Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+    /// </summary>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since last_knowledge_of_server will be included.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<CategoryGroupWithCategoriesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+}
