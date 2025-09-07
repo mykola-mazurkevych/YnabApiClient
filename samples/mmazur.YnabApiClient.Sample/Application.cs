@@ -1,11 +1,10 @@
-﻿#pragma warning disable CS9113 // Parameter is unread
-
-namespace mmazur.YnabApiClient.Sample;
+﻿namespace mmazur.YnabApiClient.Sample;
 
 internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
 {
-    public Task RunAsync(CancellationToken cancellationToken = default)
+    public async Task RunAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var userResponse = await ynabApiClient.V1.User.GetAsync(cancellationToken);
+        Console.WriteLine(userResponse.User);
     }
 }

@@ -1,5 +1,12 @@
-﻿#pragma warning disable CS9113
+﻿using mmazur.YnabApiClient.V1.Clients;
+using mmazur.YnabApiClient.V1.Interfaces;
 
 namespace mmazur.YnabApiClient;
 
-internal sealed class YnabApiClient(IHttpClientFactory httpClientFactory, string bearerToken) : IYnabApiClient;
+internal sealed class YnabApiClient(IHttpClientFactory httpClientFactory, string bearerToken)
+    : IYnabApiClient
+{
+    private readonly Uri _baseUri = new("https://api.ynab.com/");
+
+    public IYnabV1ApiClient V1 => new YnabV1ApiClient(httpClientFactory, _baseUri, bearerToken);
+}
