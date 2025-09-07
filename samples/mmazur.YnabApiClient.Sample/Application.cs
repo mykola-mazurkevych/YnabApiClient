@@ -1,6 +1,4 @@
-﻿using mmazur.YnabApiClient.V1.Models.Accounts;
-
-namespace mmazur.YnabApiClient.Sample;
+﻿namespace mmazur.YnabApiClient.Sample;
 
 internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
 {
@@ -32,9 +30,13 @@ internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
         Console.WriteLine(accountResponse.Account);
         Console.WriteLine();
 
-        var createAccount = new CreateAccount { Name = "Test Account", Type = AccountType.Cash, Balance = 0 };
-        var createdAccountResponse = await ynabApiClient.V1.Budgets[testBudget.Id].Accounts.CreateAsync(createAccount, cancellationToken);
-        Console.WriteLine(createdAccountResponse.Account);
+        ////var createAccount = new CreateAccount { Name = "Test Account", Type = AccountType.Cash, Balance = 0 };
+        ////var createdAccountResponse = await ynabApiClient.V1.Budgets[testBudget.Id].Accounts.CreateAsync(createAccount, cancellationToken);
+        ////Console.WriteLine(createdAccountResponse.Account);
+        ////Console.WriteLine();
+
+        var payeesResponse = await ynabApiClient.V1.Budgets[testBudget.Id].Payees.GetAsync(cancellationToken);
+        Console.WriteLine(payeesResponse.Payees);
         Console.WriteLine();
     }
 }
