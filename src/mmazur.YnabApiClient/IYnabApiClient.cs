@@ -1,3 +1,8 @@
-﻿namespace mmazur.YnabApiClient;
+﻿using mmazur.YnabApiClient.V1.Interfaces;
 
-public interface IYnabApiClient;
+namespace mmazur.YnabApiClient;
+
+public interface IYnabApiClient
+{
+    IYnabV1ApiClient V1 { get; }
+}
