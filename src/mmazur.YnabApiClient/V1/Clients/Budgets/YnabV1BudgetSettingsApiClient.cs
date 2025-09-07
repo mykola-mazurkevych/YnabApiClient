@@ -10,5 +10,5 @@ internal sealed class YnabV1BudgetSettingsApiClient(IHttpClientFactory httpClien
     private readonly Uri _resourceUri = new(baseUri, "settings/");
 
     public Task<BudgetSettingsResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetDataAsync<BudgetSettingsResponse>(_resourceUri, null, bearerToken, cancellationToken);
+        this.GetAsync<BudgetSettingsResponse>(_resourceUri, null, bearerToken, cancellationToken);
 }

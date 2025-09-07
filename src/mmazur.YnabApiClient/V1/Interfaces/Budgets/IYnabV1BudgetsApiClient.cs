@@ -18,4 +18,12 @@ public interface IYnabV1BudgetsApiClient
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<BudgetsResponse> GetAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// List budgets
+    /// Returns budgets list with summary information including accounts
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<BudgetWithAccountsResponse> GetWithAccountsAsync(CancellationToken cancellationToken = default);
 }

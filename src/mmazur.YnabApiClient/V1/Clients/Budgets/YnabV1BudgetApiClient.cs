@@ -1,5 +1,7 @@
 ﻿using mmazur.YnabApiClient.Extensions;
 using mmazur.YnabApiClient.Infrastructure;
+using mmazur.YnabApiClient.V1.Clients.Accounts;
+using mmazur.YnabApiClient.V1.Interfaces.Accounts;
 using mmazur.YnabApiClient.V1.Interfaces.Budgets;
 using mmazur.YnabApiClient.V1.Models.Budgets;
 
@@ -12,6 +14,8 @@ internal sealed class YnabV1BudgetApiClient
         : base(httpClientFactory)
     {
         var resourceUri = new Uri(baseUri, $"{budgetId}/");
+
+        this.Accounts = new YnabV1AccountsApiClient(httpClientFactory, resourceUri, bearerToken);
         this.Settings = new YnabV1BudgetSettingsApiClient(httpClientFactory, resourceUri, bearerToken);
     }
 
@@ -19,8 +23,11 @@ internal sealed class YnabV1BudgetApiClient
         : base(httpClientFactory)
     {
         var resourceUri = new Uri(baseUri, budgetType.ToCustomString() + '/');
+
+        this.Accounts = new YnabV1AccountsApiClient(httpClientFactory, resourceUri, bearerToken);
         this.Settings = new YnabV1BudgetSettingsApiClient(httpClientFactory, resourceUri, bearerToken);
     }
 
+    public IYnabV1AccountsApiClient Accounts { get; }
     public IYnabV1BudgetSettingsApiClient Settings { get; }
 }
