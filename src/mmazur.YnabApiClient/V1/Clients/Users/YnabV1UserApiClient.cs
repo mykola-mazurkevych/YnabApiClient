@@ -9,6 +9,6 @@ internal sealed class YnabV1UserApiClient(IHttpClientFactory httpClientFactory, 
 {
     private readonly Uri _resourceUri = new(baseUri, "user/");
 
-    public Task<UserResponse> GetAsync(CancellationToken cancellationToken = default)
-        => this.GetDataAsync<UserResponse>(_resourceUri, null, bearerToken, cancellationToken);
+    public Task<UserResponse> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<UserResponse>(_resourceUri, null, bearerToken, cancellationToken);
 }
