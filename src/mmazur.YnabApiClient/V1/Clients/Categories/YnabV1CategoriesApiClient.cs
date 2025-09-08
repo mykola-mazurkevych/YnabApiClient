@@ -15,9 +15,9 @@ internal sealed class YnabV1CategoriesApiClient(IHttpClientFactory httpClientFac
     public IYnabV1CategoryApiClient this[Guid categoryId] =>
         _categoryClients.GetOrAdd(categoryId, () => new YnabV1CategoryApiClient(_httpClientFactory, _resourcesUri, categoryId, bearerToken));
 
-    public Task<CategoryGroupWithCategoriesResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync<CategoryGroupWithCategoriesResponse>(_resourcesUri, null, bearerToken, cancellationToken);
+    public Task<CategoriesResponse> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<CategoriesResponse>(_resourcesUri, null, bearerToken, cancellationToken);
 
-    public Task<CategoryGroupWithCategoriesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
-        this.GetAsync<CategoryGroupWithCategoriesResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
+    public Task<CategoriesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+        this.GetAsync<CategoriesResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 }

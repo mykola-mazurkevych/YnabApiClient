@@ -10,8 +10,11 @@ public sealed record AccountsResponse
     [JsonPropertyName("accounts")]
     private List<Account> _accounts = [];
 
-    public IReadOnlyList<Account> Accounts => _accounts.AsReadOnly();
-
+    /// <summary>
+    /// The knowledge of the server
+    /// </summary>
     [JsonPropertyName("server_knowledge")]
     public long ServerKnowledge { get; init; }
+
+    public IReadOnlyList<Account> Accounts => _accounts.AsReadOnly();
 }

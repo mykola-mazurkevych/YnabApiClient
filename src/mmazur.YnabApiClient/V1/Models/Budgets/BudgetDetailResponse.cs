@@ -2,13 +2,13 @@
 
 using System.Text.Json.Serialization;
 
-namespace mmazur.YnabApiClient.V1.Models.Categories;
+namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
-public sealed record CategoryGroupsResponse
+public sealed record BudgetDetailResponse
 {
     [JsonInclude]
-    [JsonPropertyName("category_groups")]
-    private List<CategoryGroup> _categoryGroups = [];
+    [JsonPropertyName("budgets")]
+    private List<BudgetDetail> _budgets = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -16,5 +16,5 @@ public sealed record CategoryGroupsResponse
     [JsonPropertyName("server_knowledge")]
     public long ServerKnowledge { get; init; }
 
-    public IReadOnlyList<CategoryGroup> CategoryGroups => _categoryGroups.AsReadOnly();
+    public IReadOnlyList<BudgetDetail> Budgets => _budgets.AsReadOnly();
 }

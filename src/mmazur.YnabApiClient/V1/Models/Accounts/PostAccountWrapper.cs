@@ -2,8 +2,8 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Accounts;
 
-internal sealed record CreateAccountRequest
+internal sealed record PostAccountWrapper
 {
     [JsonPropertyName("account")]
-    public required CreateAccount Account { get; init; }
+    public required SaveAccount Account { get; init; }
 }

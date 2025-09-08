@@ -2,8 +2,8 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Months;
 
-public sealed record MonthWithCategoriesResponse
+public sealed record MonthDetailResponse
 {
     [JsonPropertyName("month")]
-    public MonthWithCategories? Month { get; init; }
+    public MonthDetail? Month { get; init; }
 }

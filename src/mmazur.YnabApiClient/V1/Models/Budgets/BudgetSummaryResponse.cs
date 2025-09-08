@@ -4,14 +4,14 @@ using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
-public sealed record BudgetsResponse
+public sealed record BudgetSummaryResponse
 {
     [JsonInclude]
     [JsonPropertyName("budgets")]
-    private List<Budget> _budgets = [];
-
-    public IReadOnlyList<Budget> Budgets => _budgets.AsReadOnly();
+    private List<BudgetSummary> _budgets = [];
 
     [JsonPropertyName("default_budget")]
-    public Budget? DefaultBudget { get; init; }
+    public BudgetSummary? DefaultBudget { get; init; }
+
+    public IReadOnlyList<BudgetSummary> Budgets => _budgets.AsReadOnly();
 }

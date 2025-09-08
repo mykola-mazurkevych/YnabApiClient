@@ -14,6 +14,6 @@ internal sealed class YnabV1MonthApiClient(IHttpClientFactory httpClientFactory,
 
     public IYnabV1CategoriesApiClient Categories => new YnabV1CategoriesApiClient(_httpClientFactory, _resourceUri, bearerToken);
 
-    public Task<MonthWithCategoriesResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync<MonthWithCategoriesResponse>(_resourceUri, null, bearerToken, cancellationToken);
+    public Task<MonthDetailResponse> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<MonthDetailResponse>(_resourceUri, null, bearerToken, cancellationToken);
 }
