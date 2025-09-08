@@ -2,7 +2,7 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Categories;
 
-public sealed record UpdateCategory
+public sealed record SaveCategory
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }

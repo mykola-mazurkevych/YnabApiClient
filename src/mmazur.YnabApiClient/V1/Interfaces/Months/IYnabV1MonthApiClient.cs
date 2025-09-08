@@ -13,5 +13,5 @@ public interface IYnabV1MonthApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<MonthWithCategoriesResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<MonthDetailResponse> GetAsync(CancellationToken cancellationToken = default);
 }

@@ -17,6 +17,6 @@ internal sealed class YnabV1PayeeApiClient(IHttpClientFactory httpClientFactory,
     public Task<PayeeResponse> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<PayeeResponse>(_resourceUri, null, bearerToken, cancellationToken);
 
-    public Task<PayeeResponse> UpdateAsync(UpdatePayee payee, CancellationToken cancellationToken = default) =>
-        this.PatchAsync<PayeeResponse>(_resourceUri, new UpdatePayeeRequest { Payee = payee }, bearerToken, cancellationToken);
+    public Task<SavePayeeResponse> UpdateAsync(SavePayee payee, CancellationToken cancellationToken = default) =>
+        this.PatchAsync<SavePayeeResponse>(_resourceUri, new PatchPayeeWrapper { Payee = payee }, bearerToken, cancellationToken);
 }

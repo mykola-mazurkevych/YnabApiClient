@@ -2,8 +2,8 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Categories;
 
-internal sealed record UpdateCategoryRequest
+internal sealed record PatchCategoryWrapper
 {
     [JsonPropertyName("category")]
-    public required UpdateCategory Category { get; init; }
+    public required SaveCategory Category { get; init; }
 }

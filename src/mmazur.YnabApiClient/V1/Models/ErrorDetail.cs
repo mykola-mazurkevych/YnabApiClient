@@ -2,7 +2,7 @@
 
 namespace mmazur.YnabApiClient.V1.Models;
 
-internal sealed record Error
+internal sealed record ErrorDetail
 {
     [JsonPropertyName("id")]
     public required string Id { get; init; }

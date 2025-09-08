@@ -17,13 +17,15 @@ public interface IYnabV1BudgetsApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetsResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<BudgetSummaryResponse> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync(false, cancellationToken);
 
     /// <summary>
     /// List budgets
     /// Returns budgets list with summary information including accounts
     /// </summary>
+    /// <param name="includeAccounts">Whether to include the list of budget accounts</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetWithAccountsResponse> GetWithAccountsAsync(CancellationToken cancellationToken = default);
+    Task<BudgetSummaryResponse> GetAsync(bool includeAccounts, CancellationToken cancellationToken = default);
 }

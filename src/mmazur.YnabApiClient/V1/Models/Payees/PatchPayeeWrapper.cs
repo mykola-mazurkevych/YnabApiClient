@@ -2,8 +2,8 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Payees;
 
-internal sealed record UpdatePayeeRequest
+internal sealed record PatchPayeeWrapper
 {
     [JsonPropertyName("payee")]
-    public required UpdatePayee Payee { get; init; }
+    public required SavePayee Payee { get; init; }
 }

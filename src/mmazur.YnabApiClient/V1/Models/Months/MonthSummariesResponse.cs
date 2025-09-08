@@ -2,13 +2,13 @@
 
 using System.Text.Json.Serialization;
 
-namespace mmazur.YnabApiClient.V1.Models.Categories;
+namespace mmazur.YnabApiClient.V1.Models.Months;
 
-public sealed record CategoryGroupsResponse
+public sealed record MonthSummariesResponse
 {
     [JsonInclude]
-    [JsonPropertyName("category_groups")]
-    private List<CategoryGroup> _categoryGroups = [];
+    [JsonPropertyName("months")]
+    private List<MonthSummary> _months = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -16,5 +16,5 @@ public sealed record CategoryGroupsResponse
     [JsonPropertyName("server_knowledge")]
     public long ServerKnowledge { get; init; }
 
-    public IReadOnlyList<CategoryGroup> CategoryGroups => _categoryGroups.AsReadOnly();
+    public IReadOnlyList<MonthSummary> Months => _months.AsReadOnly();
 }

@@ -14,7 +14,7 @@ public interface IYnabV1MonthsApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<MonthsResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<MonthSummariesResponse> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List budget months
@@ -23,5 +23,5 @@ public interface IYnabV1MonthsApiClient
     /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since last_knowledge_of_server will be included.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<MonthsResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+    Task<MonthSummariesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
 }

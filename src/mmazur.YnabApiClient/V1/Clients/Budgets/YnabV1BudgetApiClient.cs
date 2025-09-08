@@ -48,4 +48,10 @@ internal sealed class YnabV1BudgetApiClient
     public IYnabV1PayeeLocationsApiClient PayeeLocations => new YnabV1PayeeLocationsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
 
     public IYnabV1BudgetSettingsApiClient Settings => new YnabV1BudgetSettingsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
+
+    public Task<BudgetDetailResponse> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<BudgetDetailResponse>(_resourceUri, null, _bearerToken, cancellationToken);
+
+    public Task<BudgetDetailResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+        this.GetAsync<BudgetDetailResponse>(_resourceUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, _bearerToken, cancellationToken);
 }

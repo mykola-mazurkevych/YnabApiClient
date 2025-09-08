@@ -2,7 +2,7 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Accounts;
 
-public sealed record CreateAccount
+public sealed record SaveAccount
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
@@ -11,5 +11,5 @@ public sealed record CreateAccount
     public required AccountType Type { get; init; }
 
     [JsonPropertyName("balance")]
-    public decimal Balance { get; init; }
+    public required decimal Balance { get; init; }
 }

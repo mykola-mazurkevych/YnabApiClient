@@ -21,5 +21,5 @@ public interface IYnabV1PayeeApiClient
     /// <param name="payee">Payee to update</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<PayeeResponse> UpdateAsync(UpdatePayee payee, CancellationToken cancellationToken = default);
+    Task<SavePayeeResponse> UpdateAsync(SavePayee payee, CancellationToken cancellationToken = default);
 }

@@ -10,8 +10,11 @@ public sealed record PayeesResponse
     [JsonPropertyName("payees")]
     private List<Payee> _payees = [];
 
-    public IReadOnlyList<Payee> Payees => _payees.AsReadOnly();
-
+    /// <summary>
+    /// The knowledge of the server
+    /// </summary>
     [JsonPropertyName("server_knowledge")]
     public long ServerKnowledge { get; init; }
+
+    public IReadOnlyList<Payee> Payees => _payees.AsReadOnly();
 }

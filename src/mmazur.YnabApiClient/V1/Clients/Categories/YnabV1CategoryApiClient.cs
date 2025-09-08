@@ -12,6 +12,6 @@ internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFacto
     public Task<CategoryResponse> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<CategoryResponse>(_resourceUri, null, bearerToken, cancellationToken);
 
-    public Task<CategoryResponse> UpdateAsync(UpdateCategory category, CancellationToken cancellationToken = default) =>
-        this.PatchAsync<CategoryResponse>(_resourceUri, new UpdateCategoryRequest { Category = category }, bearerToken, cancellationToken);
+    public Task<SaveCategoryResponse> UpdateAsync(SaveCategory category, CancellationToken cancellationToken = default) =>
+        this.PatchAsync<SaveCategoryResponse>(_resourceUri, new PatchCategoryWrapper { Category = category }, bearerToken, cancellationToken);
 }

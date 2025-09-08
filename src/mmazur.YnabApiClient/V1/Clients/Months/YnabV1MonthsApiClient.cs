@@ -15,9 +15,9 @@ internal sealed class YnabV1MonthsApiClient(IHttpClientFactory httpClientFactory
     public IYnabV1MonthApiClient this[DateOnly month] =>
         _monthClients.GetOrAdd(month, () => new YnabV1MonthApiClient(_httpClientFactory, _resourcesUri, month, bearerToken));
 
-    public Task<MonthsResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync<MonthsResponse>(_resourcesUri, null, bearerToken, cancellationToken);
+    public Task<MonthSummariesResponse> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<MonthSummariesResponse>(_resourcesUri, null, bearerToken, cancellationToken);
 
-    public Task<MonthsResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
-        this.GetAsync<MonthsResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
+    public Task<MonthSummariesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+        this.GetAsync<MonthSummariesResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 }

@@ -18,5 +18,5 @@ public interface IYnabV1CategoryApiClient
     /// <param name="category">Category to update.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<CategoryResponse> UpdateAsync(UpdateCategory category, CancellationToken cancellationToken = default);
+    Task<SaveCategoryResponse> UpdateAsync(SaveCategory category, CancellationToken cancellationToken = default);
 }

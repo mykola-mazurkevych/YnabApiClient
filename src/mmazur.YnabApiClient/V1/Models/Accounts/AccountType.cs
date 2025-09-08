@@ -1,5 +1,8 @@
 ﻿namespace mmazur.YnabApiClient.V1.Models.Accounts;
 
+/// <summary>
+/// The type of account
+/// </summary>
 public enum AccountType
 {
     Checking,
@@ -14,5 +17,5 @@ public enum AccountType
     StudentLoan,
     PersonalLoan,
     MedicalDebt,
-    OtherDebt
+    OtherDebt,
 }

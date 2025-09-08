@@ -2,7 +2,7 @@
 
 namespace mmazur.YnabApiClient.V1.Models.Payees;
 
-public sealed record UpdatePayee
+public sealed record SavePayee
 {
     [JsonPropertyName("name")]
     public required string Name { get; init; }
