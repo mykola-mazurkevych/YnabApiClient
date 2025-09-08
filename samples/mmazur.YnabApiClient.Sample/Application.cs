@@ -7,6 +7,5 @@ internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
     public Task RunAsync(CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
-
     }
 }
