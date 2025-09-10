@@ -3,6 +3,7 @@ using mmazur.YnabApiClient.V1.Interfaces.Categories;
 using mmazur.YnabApiClient.V1.Interfaces.Months;
 using mmazur.YnabApiClient.V1.Interfaces.PayeeLocations;
 using mmazur.YnabApiClient.V1.Interfaces.Payees;
+using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Budgets;
 
 namespace mmazur.YnabApiClient.V1.Interfaces.Budgets;
@@ -17,6 +18,8 @@ public interface IYnabV1BudgetApiClient
 
     IYnabV1PayeesApiClient Payees { get; }
     IYnabV1PayeeLocationsApiClient PayeeLocations { get; }
+
+    IYnabV1ScheduledTransactionsApiClient ScheduledTransactions { get; }
 
     IYnabV1BudgetSettingsApiClient Settings { get; }
 
