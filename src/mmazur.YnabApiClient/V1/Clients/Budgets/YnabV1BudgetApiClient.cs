@@ -5,12 +5,14 @@ using mmazur.YnabApiClient.V1.Clients.Categories;
 using mmazur.YnabApiClient.V1.Clients.Months;
 using mmazur.YnabApiClient.V1.Clients.PayeeLocations;
 using mmazur.YnabApiClient.V1.Clients.Payees;
+using mmazur.YnabApiClient.V1.Clients.Transactions;
 using mmazur.YnabApiClient.V1.Interfaces.Accounts;
 using mmazur.YnabApiClient.V1.Interfaces.Budgets;
 using mmazur.YnabApiClient.V1.Interfaces.Categories;
 using mmazur.YnabApiClient.V1.Interfaces.Months;
 using mmazur.YnabApiClient.V1.Interfaces.PayeeLocations;
 using mmazur.YnabApiClient.V1.Interfaces.Payees;
+using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Budgets;
 
 namespace mmazur.YnabApiClient.V1.Clients.Budgets;
@@ -46,6 +48,8 @@ internal sealed class YnabV1BudgetApiClient
 
     public IYnabV1PayeesApiClient Payees => new YnabV1PayeesApiClient(_httpClientFactory, _resourceUri, _bearerToken);
     public IYnabV1PayeeLocationsApiClient PayeeLocations => new YnabV1PayeeLocationsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
+
+    public IYnabV1ScheduledTransactionsApiClient ScheduledTransactions => new YnabV1ScheduledTransactionsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
 
     public IYnabV1BudgetSettingsApiClient Settings => new YnabV1BudgetSettingsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
 

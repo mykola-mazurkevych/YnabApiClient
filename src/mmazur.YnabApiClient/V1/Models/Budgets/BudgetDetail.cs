@@ -7,6 +7,7 @@ using mmazur.YnabApiClient.V1.Models.Categories;
 using mmazur.YnabApiClient.V1.Models.Months;
 using mmazur.YnabApiClient.V1.Models.PayeeLocations;
 using mmazur.YnabApiClient.V1.Models.Payees;
+using mmazur.YnabApiClient.V1.Models.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
@@ -44,13 +45,13 @@ public sealed record BudgetDetail
     ////[JsonPropertyName("subtransactions")]
     ////private List<SubTransaction> _subTransactions = [];
 
-    ////[JsonInclude]
-    ////[JsonPropertyName("scheduled_transactions")]
-    ////private List<ScheduledTransactionSummary> _scheduledTransactions = [];
+    [JsonInclude]
+    [JsonPropertyName("scheduled_transactions")]
+    private List<ScheduledTransactionSummary> _scheduledTransactions = [];
 
-    ////[JsonInclude]
-    ////[JsonPropertyName("scheduled_subtransactions")]
-    ////private List<ScheduledSubTransaction> _scheduledSubTransactions = [];
+    [JsonInclude]
+    [JsonPropertyName("scheduled_subtransactions")]
+    private List<ScheduledSubTransaction> _scheduledSubTransactions = [];
 
     [JsonPropertyName("id")]
     public required Guid Id { get; init; }
@@ -86,6 +87,6 @@ public sealed record BudgetDetail
     ////public IReadOnlyList<TransactionSummary> Transactions => _transactions.AsReadOnly();
     ////public IReadOnlyList<Subtransaction> Subtransactions => _subtransactions.AsReadOnly();
 
-    ////public IReadOnlyList<ScheduledTransactionSummary> ScheduledTransactions => _scheduledTransactions.AsReadOnly();
-    ////public IReadOnlyList<ScheduledSubTransaction> ScheduledSubtransactions => _scheduledSubTransactions.AsReadOnly();
+    public IReadOnlyList<ScheduledTransactionSummary> ScheduledTransactions => _scheduledTransactions.AsReadOnly();
+    public IReadOnlyList<ScheduledSubTransaction> ScheduledSubtransactions => _scheduledSubTransactions.AsReadOnly();
 }
