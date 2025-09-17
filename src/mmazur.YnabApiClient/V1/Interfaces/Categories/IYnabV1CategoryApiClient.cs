@@ -1,9 +1,12 @@
-﻿using mmazur.YnabApiClient.V1.Models.Categories;
+﻿using mmazur.YnabApiClient.V1.Interfaces.Transactions;
+using mmazur.YnabApiClient.V1.Models.Categories;
 
 namespace mmazur.YnabApiClient.V1.Interfaces.Categories;
 
 public interface IYnabV1CategoryApiClient
 {
+    IYnabV1TransactionsApiClient Transactions { get; }
+
     /// <summary>
     /// Single category
     /// Returns a single category. Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).

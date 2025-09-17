@@ -162,6 +162,51 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory)
         return dataResponse.Data;
     }
 
+    protected async Task<TResponse> PutAsync<TResponse>(Uri uri, object value, string bearerToken, CancellationToken cancellationToken)
+    {
+        using var httpClient = httpClientFactory.CreateClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+
+        var json = JsonSerializer.Serialize(value, JsonSerializerOptions);
+
+#if DEBUG
+        Console.Write("Request: ");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"PUT {uri}");
+        Console.WriteLine(json);
+        Console.ResetColor();
+#endif
+
+        var stringContent = new StringContent(json, Encoding.UTF8, JsonContentType);
+        var httpResponseMessage = await httpClient.PutAsync(uri, stringContent, cancellationToken).ConfigureAwait(false);
+
+#if DEBUG
+        var responseContentAsString = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+        var jsonDocument = JsonDocument.Parse(responseContentAsString);
+        Console.WriteLine("Response:");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(JsonSerializer.Serialize(jsonDocument, JsonSerializerOptions));
+        Console.ResetColor();
+#endif
+
+        await using var responseContent = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        DataResponse<TResponse> dataResponse;
+
+        switch (httpResponseMessage.StatusCode)
+        {
+            case HttpStatusCode.OK:
+                dataResponse = await DeserializeResponseContentAsync<DataResponse<TResponse>>(responseContent, cancellationToken).ConfigureAwait(false);
+                break;
+            default:
+                var errorResponse = await DeserializeResponseContentAsync<ErrorResponse>(responseContent, cancellationToken).ConfigureAwait(false);
+                throw new YnabApiClientError(errorResponse.Error.Id, errorResponse.Error.Name, errorResponse.Error.Detail);
+        }
+
+        return dataResponse.Data;
+    }
+
     protected async Task<TResponse> DeleteAsync<TResponse>(Uri uri, string bearerToken, CancellationToken cancellationToken)
     {
         using var httpClient = httpClientFactory.CreateClient();

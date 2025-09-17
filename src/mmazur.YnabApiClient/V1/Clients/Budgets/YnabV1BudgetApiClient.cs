@@ -1,5 +1,4 @@
-﻿using mmazur.YnabApiClient.Extensions;
-using mmazur.YnabApiClient.Infrastructure;
+﻿using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Clients.Accounts;
 using mmazur.YnabApiClient.V1.Clients.Categories;
 using mmazur.YnabApiClient.V1.Clients.Months;
@@ -50,6 +49,7 @@ internal sealed class YnabV1BudgetApiClient
     public IYnabV1PayeeLocationsApiClient PayeeLocations => new YnabV1PayeeLocationsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
 
     public IYnabV1ScheduledTransactionsApiClient ScheduledTransactions => new YnabV1ScheduledTransactionsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
+    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
 
     public IYnabV1BudgetSettingsApiClient Settings => new YnabV1BudgetSettingsApiClient(_httpClientFactory, _resourceUri, _bearerToken);
 

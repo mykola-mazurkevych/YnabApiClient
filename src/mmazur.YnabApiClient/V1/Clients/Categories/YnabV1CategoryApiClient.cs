@@ -1,5 +1,7 @@
 ﻿using mmazur.YnabApiClient.Infrastructure;
+using mmazur.YnabApiClient.V1.Clients.Transactions;
 using mmazur.YnabApiClient.V1.Interfaces.Categories;
+using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Categories;
 
 namespace mmazur.YnabApiClient.V1.Clients.Categories;
@@ -7,7 +9,10 @@ namespace mmazur.YnabApiClient.V1.Clients.Categories;
 internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFactory, Uri baseUri, Guid categoryId, string bearerToken)
     : YnabApiClientBase(httpClientFactory), IYnabV1CategoryApiClient
 {
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly Uri _resourceUri = new(baseUri, $"{categoryId}/");
+
+    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _resourceUri, bearerToken);
 
     public Task<CategoryResponse> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<CategoryResponse>(_resourceUri, null, bearerToken, cancellationToken);

@@ -1,8 +1,6 @@
-﻿using mmazur.YnabApiClient.V1.Models.Budgets;
+﻿namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
-namespace mmazur.YnabApiClient.Extensions;
-
-internal static class EnumExtensions
+internal static class BudgetTypExtensions
 {
     public static string ToCustomString(this BudgetType budgetType) =>
         budgetType switch

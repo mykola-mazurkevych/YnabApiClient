@@ -26,14 +26,14 @@ public sealed record SaveScheduledTransaction
     /// Account transfer payees are specified as transfer_payee_id on the account resource.
     /// </summary>
     [JsonPropertyName("payee_id")]
-    public required Guid? PayeeId { get; init; }
+    public Guid? PayeeId { get; init; }
 
     /// <summary>
     /// The payee name for the scheduled transaction.
     /// If a payee_name value is provided and payee_id has a null value, the payee_name value will be used to resolve the payee by either (1) a payee with the same name or (2) creation of a new payee.
     /// </summary>
     [JsonPropertyName("payee_name")]
-    public required string? PayeeName { get; init; }
+    public string? PayeeName { get; init; }
 
     /// <summary>
     /// The category for the scheduled transaction.
@@ -41,14 +41,14 @@ public sealed record SaveScheduledTransaction
     /// Creating a split scheduled transaction is not currently supported.
     /// </summary>
     [JsonPropertyName("category_id")]
-    public required Guid? CategoryId { get; init; }
+    public Guid? CategoryId { get; init; }
 
     [JsonPropertyName("memo")]
-    public required string? Memo { get; init; }
+    public string? Memo { get; init; }
 
     [JsonPropertyName("flag_color")]
-    public required TransactionFlagColor? FlagColor { get; init; }
+    public TransactionFlagColor? FlagColor { get; init; }
 
     [JsonPropertyName("frequency")]
-    public required ScheduledTransactionFrequency? Frequency { get; init; }
+    public ScheduledTransactionFrequency? Frequency { get; init; }
 }
