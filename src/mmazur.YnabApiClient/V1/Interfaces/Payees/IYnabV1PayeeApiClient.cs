@@ -1,4 +1,5 @@
 ﻿using mmazur.YnabApiClient.V1.Interfaces.PayeeLocations;
+using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Payees;
 
 namespace mmazur.YnabApiClient.V1.Interfaces.Payees;
@@ -6,6 +7,7 @@ namespace mmazur.YnabApiClient.V1.Interfaces.Payees;
 public interface IYnabV1PayeeApiClient
 {
     IYnabV1PayeeLocationsApiClient Locations { get; }
+    IYnabV1TransactionsApiClient Transactions { get; }
 
     /// <summary>
     /// Single payee

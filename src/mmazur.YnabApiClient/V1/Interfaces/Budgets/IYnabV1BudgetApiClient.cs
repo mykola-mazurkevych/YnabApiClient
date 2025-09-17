@@ -20,6 +20,7 @@ public interface IYnabV1BudgetApiClient
     IYnabV1PayeeLocationsApiClient PayeeLocations { get; }
 
     IYnabV1ScheduledTransactionsApiClient ScheduledTransactions { get; }
+    IYnabV1TransactionsApiClient Transactions { get; }
 
     IYnabV1BudgetSettingsApiClient Settings { get; }
 
