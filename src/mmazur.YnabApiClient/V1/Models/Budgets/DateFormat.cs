@@ -8,5 +8,6 @@ namespace mmazur.YnabApiClient.V1.Models.Budgets;
 public sealed record DateFormat
 {
     [JsonPropertyName("format")]
+    [JsonRequired]
     public required string Format { get; init; }
 }

@@ -6,12 +6,19 @@ namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
 public sealed record BudgetSummaryResponse
 {
+    [JsonConstructor]
+    private BudgetSummaryResponse()
+    {
+    }
+
     [JsonInclude]
     [JsonPropertyName("budgets")]
+    [JsonRequired]
     private List<BudgetSummary> _budgets = [];
 
     [JsonPropertyName("default_budget")]
-    public required BudgetSummary? DefaultBudget { get; init; }
+    public BudgetSummary? DefaultBudget { get; init; }
 
+    [JsonIgnore]
     public IReadOnlyList<BudgetSummary> Budgets => _budgets.AsReadOnly();
 }

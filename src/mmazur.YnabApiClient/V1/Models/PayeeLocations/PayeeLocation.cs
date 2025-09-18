@@ -5,22 +5,25 @@ namespace mmazur.YnabApiClient.V1.Models.PayeeLocations;
 public sealed record PayeeLocation
 {
     [JsonPropertyName("id")]
+    [JsonRequired]
     public required Guid Id { get; init; }
 
     [JsonPropertyName("payee_id")]
+    [JsonRequired]
     public required Guid PayeeId { get; init; }
 
-    // TODO: change to double
     [JsonPropertyName("latitude")]
-    public required string Latitude { get; init; }
+    [JsonRequired]
+    public required double Latitude { get; init; }
 
-    // TODO: change to double
     [JsonPropertyName("longitude")]
-    public required string Longitude { get; init; }
+    [JsonRequired]
+    public required double Longitude { get; init; }
 
     /// <summary>
     /// Whether the payee location has been deleted. Deleted payee locations will only be included in delta requests
     /// </summary>
     [JsonPropertyName("deleted")]
+    [JsonRequired]
     public required bool Deleted { get; init; }
 }

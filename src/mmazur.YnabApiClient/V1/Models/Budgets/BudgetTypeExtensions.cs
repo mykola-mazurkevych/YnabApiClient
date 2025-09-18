@@ -1,6 +1,6 @@
 ﻿namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
-internal static class BudgetTypExtensions
+internal static class BudgetTypeExtensions
 {
     public static string ToCustomString(this BudgetType budgetType) =>
         budgetType switch

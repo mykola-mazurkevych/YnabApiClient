@@ -5,11 +5,13 @@ namespace mmazur.YnabApiClient.V1.Models.Payees;
 public sealed record SavePayeeResponse
 {
     [JsonPropertyName("payee")]
-    public required Payee? Payee { get; init; }
+    [JsonRequired]
+    public required Payee Payee { get; init; }
 
     /// <summary>
     /// The knowledge of the server
     /// </summary>
     [JsonPropertyName("server_knowledge")]
+    [JsonRequired]
     public required long ServerKnowledge { get; init; }
 }

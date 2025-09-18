@@ -6,9 +6,16 @@ namespace mmazur.YnabApiClient.V1.Models.PayeeLocations;
 
 public sealed record PayeeLocationsResponse
 {
+    [JsonConstructor]
+    private PayeeLocationsResponse()
+    {
+    }
+
     [JsonInclude]
     [JsonPropertyName("payee_locations")]
+    [JsonRequired]
     private List<PayeeLocation> _payeeLocations = [];
 
+    [JsonIgnore]
     public IReadOnlyList<PayeeLocation> PayeeLocations => _payeeLocations.AsReadOnly();
 }
