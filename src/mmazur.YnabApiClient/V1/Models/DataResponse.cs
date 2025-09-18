@@ -3,7 +3,8 @@
 namespace mmazur.YnabApiClient.V1.Models;
 
 internal sealed record DataResponse<TData>
+    where TData : class
 {
     [JsonPropertyName("data")]
-    public required TData Data { get; init; }
+    public required TData? Data { get; init; }
 }

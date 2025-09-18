@@ -13,7 +13,7 @@ public interface IYnabV1CategoryApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<CategoryResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<CategoryResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Update a category

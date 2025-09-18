@@ -14,7 +14,7 @@ public sealed record ScheduledTransactionsResponse
     /// The knowledge of the server
     /// </summary>
     [JsonPropertyName("server_knowledge")]
-    public long ServerKnowledge { get; init; }
+    public required long ServerKnowledge { get; init; }
 
     public IReadOnlyList<ScheduledTransactionDetail> ScheduledTransactions => _scheduledTransactions.AsReadOnly();
 }

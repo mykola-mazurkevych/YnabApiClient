@@ -1,16 +1,18 @@
-﻿using mmazur.YnabApiClient.Infrastructure;
+﻿using Microsoft.Extensions.Logging;
+
+using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Clients.Transactions;
 
-internal sealed class YnabV1TransactionApiClient(IHttpClientFactory httpClientFactory, Uri baseUri, string transactionId, string bearerToken)
-    : YnabApiClientBase(httpClientFactory), IYnabV1TransactionApiClient
+internal sealed class YnabV1TransactionApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string transactionId, string bearerToken)
+    : YnabApiClientBase(httpClientFactory, logger), IYnabV1TransactionApiClient
 {
     private readonly Uri _resourceUri = new(baseUri, $"{transactionId}/");
 
-    public Task<TransactionResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync<TransactionResponse>(_resourceUri, null, bearerToken, cancellationToken);
+    public Task<TransactionResponse?> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<TransactionResponse>(_resourceUri, bearerToken, cancellationToken);
 
     public Task<TransactionResponse> UpdateAsync(ExistingTransaction transaction, CancellationToken cancellationToken = default) =>
         this.PutAsync<TransactionResponse>(_resourceUri, new PutTransactionWrapper { Transaction = transaction }, bearerToken, cancellationToken);

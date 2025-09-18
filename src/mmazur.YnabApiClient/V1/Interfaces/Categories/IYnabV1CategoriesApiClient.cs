@@ -14,7 +14,7 @@ public interface IYnabV1CategoriesApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<CategoriesResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<CategoriesResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List categories
@@ -23,5 +23,5 @@ public interface IYnabV1CategoriesApiClient
     /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since last_knowledge_of_server will be included.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<CategoriesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+    Task<CategoriesResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
 }

@@ -1,42 +1,45 @@
-﻿using mmazur.YnabApiClient.Extensions;
+﻿using Microsoft.Extensions.Logging;
+
+using mmazur.YnabApiClient.Extensions;
 using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Clients.Transactions;
 
-internal sealed class YnabV1TransactionsApiClient(IHttpClientFactory httpClientFactory, Uri baseUri, string bearerToken)
-    : YnabApiClientBase(httpClientFactory), IYnabV1TransactionsApiClient
+internal sealed class YnabV1TransactionsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
+    : YnabApiClientBase(httpClientFactory, logger), IYnabV1TransactionsApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
+    private readonly ILogger? _logger = logger;
     private readonly Uri _resourcesUri = new(baseUri, "transactions/");
     private readonly Dictionary<string, IYnabV1TransactionApiClient> _transactionClients = [];
 
     public IYnabV1TransactionApiClient this[string transactionsId] =>
-        _transactionClients.GetOrAdd(transactionsId, () => new YnabV1TransactionApiClient(_httpClientFactory, _resourcesUri, transactionsId, bearerToken));
+        _transactionClients.GetOrAdd(transactionsId, () => new YnabV1TransactionApiClient(_httpClientFactory, _logger, _resourcesUri, transactionsId, bearerToken));
 
-    public Task<TransactionsResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync<TransactionsResponse>(_resourcesUri, null, bearerToken, cancellationToken);
+    public Task<TransactionsResponse?> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<TransactionsResponse>(_resourcesUri, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(DateOnly sinceDate, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(DateOnly sinceDate, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { since_date = sinceDate }, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(DateOnly sinceDate, TransactionType type, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(DateOnly sinceDate, TransactionType type, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { since_date = sinceDate, type = type.ToCustomString() }, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(DateOnly sinceDate, long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(DateOnly sinceDate, long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { since_date = sinceDate, last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(DateOnly sinceDate, TransactionType type, long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(DateOnly sinceDate, TransactionType type, long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { since_date = sinceDate, type = type.ToCustomString(), last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(TransactionType type, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(TransactionType type, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { type = type.ToCustomString() }, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(TransactionType type, long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(TransactionType type, long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { type = type.ToCustomString(), last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 
-    public Task<TransactionsResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+    public Task<TransactionsResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
 
     public Task<SaveTransactionResponse> CreateAsync(NewTransaction transaction, CancellationToken cancellationToken = default) =>

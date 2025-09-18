@@ -14,7 +14,7 @@ public sealed record CategoriesResponse
     /// The knowledge of the server
     /// </summary>
     [JsonPropertyName("server_knowledge")]
-    public long ServerKnowledge { get; init; }
+    public required long ServerKnowledge { get; init; }
 
     public IReadOnlyList<CategoryGroupWithCategories> CategoryGroups => _categoryGroups.AsReadOnly();
 }

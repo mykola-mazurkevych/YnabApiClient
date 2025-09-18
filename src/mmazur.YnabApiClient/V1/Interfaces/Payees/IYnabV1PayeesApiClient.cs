@@ -14,7 +14,7 @@ public interface IYnabV1PayeesApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<PayeesResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<PayeesResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List payees
@@ -23,5 +23,5 @@ public interface IYnabV1PayeesApiClient
     /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since lastKnowledgeOfServer will be included.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<PayeesResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+    Task<PayeesResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
 }

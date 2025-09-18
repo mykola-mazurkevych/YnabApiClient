@@ -17,8 +17,7 @@ public interface IYnabV1BudgetsApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetSummaryResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync(false, cancellationToken);
+    Task<BudgetSummaryResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List budgets
@@ -27,5 +26,5 @@ public interface IYnabV1BudgetsApiClient
     /// <param name="includeAccounts">Whether to include the list of budget accounts</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetSummaryResponse> GetAsync(bool includeAccounts, CancellationToken cancellationToken = default);
+    Task<BudgetSummaryResponse?> GetAsync(bool includeAccounts, CancellationToken cancellationToken = default);
 }

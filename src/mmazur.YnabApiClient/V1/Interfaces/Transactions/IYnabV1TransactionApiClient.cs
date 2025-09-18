@@ -10,7 +10,7 @@ public interface IYnabV1TransactionApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TransactionResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<TransactionResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing transaction

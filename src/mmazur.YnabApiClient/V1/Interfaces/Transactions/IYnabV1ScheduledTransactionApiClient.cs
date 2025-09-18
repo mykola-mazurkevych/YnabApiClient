@@ -10,7 +10,7 @@ public interface IYnabV1ScheduledTransactionApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ScheduledTransactionResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<ScheduledTransactionResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing scheduled transaction

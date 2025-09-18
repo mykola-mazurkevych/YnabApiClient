@@ -14,7 +14,7 @@ public sealed record BudgetDetailResponse
     /// The knowledge of the server
     /// </summary>
     [JsonPropertyName("server_knowledge")]
-    public long ServerKnowledge { get; init; }
+    public required long ServerKnowledge { get; init; }
 
     public IReadOnlyList<BudgetDetail> Budgets => _budgets.AsReadOnly();
 }
