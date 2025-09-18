@@ -1,4 +1,6 @@
-﻿using mmazur.YnabApiClient.Infrastructure;
+﻿using Microsoft.Extensions.Logging;
+
+using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Clients.Transactions;
 using mmazur.YnabApiClient.V1.Interfaces.Categories;
 using mmazur.YnabApiClient.V1.Interfaces.Transactions;
@@ -6,16 +8,17 @@ using mmazur.YnabApiClient.V1.Models.Categories;
 
 namespace mmazur.YnabApiClient.V1.Clients.Categories;
 
-internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFactory, Uri baseUri, Guid categoryId, string bearerToken)
-    : YnabApiClientBase(httpClientFactory), IYnabV1CategoryApiClient
+internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid categoryId, string bearerToken)
+    : YnabApiClientBase(httpClientFactory, logger), IYnabV1CategoryApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
+    private readonly ILogger? _logger = logger;
     private readonly Uri _resourceUri = new(baseUri, $"{categoryId}/");
 
-    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _resourceUri, bearerToken);
+    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
-    public Task<CategoryResponse> GetAsync(CancellationToken cancellationToken = default) =>
-        this.GetAsync<CategoryResponse>(_resourceUri, null, bearerToken, cancellationToken);
+    public Task<CategoryResponse?> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<CategoryResponse>(_resourceUri, bearerToken, cancellationToken);
 
     public Task<SaveCategoryResponse> UpdateAsync(SaveCategory category, CancellationToken cancellationToken = default) =>
         this.PatchAsync<SaveCategoryResponse>(_resourceUri, new PatchCategoryWrapper { Category = category }, bearerToken, cancellationToken);

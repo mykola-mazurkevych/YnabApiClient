@@ -14,7 +14,7 @@ public interface IYnabV1ScheduledTransactionsApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ScheduledTransactionsResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<ScheduledTransactionsResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// List scheduled transactions
@@ -23,7 +23,7 @@ public interface IYnabV1ScheduledTransactionsApiClient
     /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since last_knowledge_of_server will be included.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<ScheduledTransactionsResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+    Task<ScheduledTransactionsResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Create a single scheduled transaction

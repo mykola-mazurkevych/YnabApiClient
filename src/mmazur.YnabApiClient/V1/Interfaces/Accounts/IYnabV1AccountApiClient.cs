@@ -13,5 +13,5 @@ public interface IYnabV1AccountApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<AccountResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<AccountResponse?> GetAsync(CancellationToken cancellationToken = default);
 }

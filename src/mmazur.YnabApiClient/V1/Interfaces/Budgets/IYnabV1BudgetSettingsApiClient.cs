@@ -10,5 +10,5 @@ public interface IYnabV1BudgetSettingsApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetSettingsResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<BudgetSettingsResponse?> GetAsync(CancellationToken cancellationToken = default);
 }

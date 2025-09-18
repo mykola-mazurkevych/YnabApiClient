@@ -10,5 +10,5 @@ public interface IYnabV1PayeeLocationApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<PayeeLocationResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<PayeeLocationResponse?> GetAsync(CancellationToken cancellationToken = default);
 }

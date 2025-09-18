@@ -29,7 +29,7 @@ public interface IYnabV1BudgetApiClient
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetDetailResponse> GetAsync(CancellationToken cancellationToken = default);
+    Task<BudgetDetailResponse?> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Returns a single budget with all related entities. This resource is effectively a full budget export.
@@ -37,5 +37,5 @@ public interface IYnabV1BudgetApiClient
     /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since last_knowledge_of_server will be included.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<BudgetDetailResponse> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+    Task<BudgetDetailResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
 }

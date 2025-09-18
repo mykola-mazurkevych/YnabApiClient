@@ -5,5 +5,5 @@ namespace mmazur.YnabApiClient.V1.Models.Accounts;
 public sealed record AccountResponse
 {
     [JsonPropertyName("account")]
-    public Account? Account { get; init; }
+    public required Account Account { get; init; }
 }

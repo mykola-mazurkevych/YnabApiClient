@@ -11,7 +11,7 @@ public sealed record BudgetSummaryResponse
     private List<BudgetSummary> _budgets = [];
 
     [JsonPropertyName("default_budget")]
-    public BudgetSummary? DefaultBudget { get; init; }
+    public required BudgetSummary? DefaultBudget { get; init; }
 
     public IReadOnlyList<BudgetSummary> Budgets => _budgets.AsReadOnly();
 }
