@@ -5,14 +5,14 @@ namespace mmazur.YnabApiClient.V1.Models.Categories;
 public sealed record SaveCategory
 {
     [JsonPropertyName("name")]
-    public required string Name { get; init; }
+    public string? Name { get; init; }
 
     [JsonPropertyName("note")]
-    public required string? Note { get; init; }
+    public string? Note { get; init; }
 
     [JsonPropertyName("category_group_id")]
-    public required Guid CategoryGroupId { get; init; }
+    public Guid CategoryGroupId { get; init; }
 
     [JsonPropertyName("goal_target")]
-    public required decimal GoalTarget { get; init; }
+    public decimal? GoalTarget { get; init; }
 }

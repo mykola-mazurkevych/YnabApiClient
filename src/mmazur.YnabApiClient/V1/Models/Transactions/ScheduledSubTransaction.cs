@@ -5,41 +5,45 @@ namespace mmazur.YnabApiClient.V1.Models.Transactions;
 public sealed record ScheduledSubTransaction
 {
     [JsonPropertyName("id")]
+    [JsonRequired]
     public required Guid Id { get; init; }
 
     [JsonPropertyName("scheduled_transaction_id")]
+    [JsonRequired]
     public required Guid ScheduledTransactionId { get; init; }
 
     /// <summary>
     /// The scheduled subtransaction amount
     /// </summary>
     [JsonPropertyName("amount")]
+    [JsonRequired]
     public required decimal Amount { get; init; }
 
     [JsonPropertyName("memo")]
-    public required string? Memo { get; init; }
+    public string? Memo { get; init; }
 
     [JsonPropertyName("payee_id")]
-    public required Guid? PayeeId { get; init; }
+    public Guid? PayeeId { get; init; }
 
     [JsonPropertyName("payee_name")]
-    public required string? PayeeName { get; init; }
+    public string? PayeeName { get; init; }
 
     [JsonPropertyName("category_id")]
-    public required Guid? CategoryId { get; init; }
+    public Guid? CategoryId { get; init; }
 
     [JsonPropertyName("category_name")]
-    public required string? CategoryName { get; init; }
+    public string? CategoryName { get; init; }
 
     /// <summary>
     /// If a transfer, the account_id which the scheduled subtransaction transfers to
     /// </summary>
     [JsonPropertyName("transfer_account_id")]
-    public required Guid? TransferAccountId { get; init; }
+    public Guid? TransferAccountId { get; init; }
 
     /// <summary>
     /// Whether the scheduled subtransaction has been deleted. Deleted scheduled subtransactions will only be included in delta requests.
     /// </summary>
     [JsonPropertyName("deleted")]
+    [JsonRequired]
     public required bool Deleted { get; init; }
 }

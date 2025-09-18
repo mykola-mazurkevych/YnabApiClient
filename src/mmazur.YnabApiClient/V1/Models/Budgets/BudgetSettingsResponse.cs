@@ -4,6 +4,12 @@ namespace mmazur.YnabApiClient.V1.Models.Budgets;
 
 public sealed record BudgetSettingsResponse
 {
+    [JsonConstructor]
+    private BudgetSettingsResponse()
+    {
+    }
+
     [JsonPropertyName("settings")]
-    public BudgetSettings? Settings { get; init; }
+    [JsonRequired]
+    public required BudgetSettings Settings { get; init; }
 }

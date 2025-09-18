@@ -30,5 +30,6 @@ public sealed record SaveSubTransaction
     [JsonPropertyName("category_id")]
     public Guid? CategoryId { get; init; }
 
+    [JsonPropertyName("memo")]
     public string? Memo { get; init; }
 }

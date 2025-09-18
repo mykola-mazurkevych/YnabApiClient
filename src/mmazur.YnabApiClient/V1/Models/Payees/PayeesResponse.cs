@@ -8,13 +8,16 @@ public sealed record PayeesResponse
 {
     [JsonInclude]
     [JsonPropertyName("payees")]
+    [JsonRequired]
     private List<Payee> _payees = [];
 
     /// <summary>
     /// The knowledge of the server
     /// </summary>
     [JsonPropertyName("server_knowledge")]
+    [JsonRequired]
     public required long ServerKnowledge { get; init; }
 
+    [JsonIgnore]
     public IReadOnlyList<Payee> Payees => _payees.AsReadOnly();
 }

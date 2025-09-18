@@ -1,6 +1,6 @@
 ﻿namespace mmazur.YnabApiClient.V1.Models.Transactions;
 
-internal static class TransactionTypExtensions
+internal static class TransactionTypeExtensions
 {
     public static string ToCustomString(this TransactionType transactionType) =>
         transactionType switch
