@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 
-using mmazur.YnabApiClient.Extensions;
 using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Interfaces.Months;
 using mmazur.YnabApiClient.V1.Models.Months;
@@ -13,10 +12,9 @@ internal sealed class YnabV1MonthsApiClient(IHttpClientFactory httpClientFactory
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourcesUri = new(baseUri, "months/");
-    private readonly Dictionary<DateOnly, IYnabV1MonthApiClient> _monthClients = [];
 
     public IYnabV1MonthApiClient this[DateOnly month] =>
-        _monthClients.GetOrAdd(month, () => new YnabV1MonthApiClient(_httpClientFactory, _logger, _resourcesUri, month, bearerToken));
+        new YnabV1MonthApiClient(_httpClientFactory, _logger, _resourcesUri, month, bearerToken);
 
     public Task<MonthSummariesResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<MonthSummariesResponse>(_resourcesUri, bearerToken, cancellationToken);
