@@ -90,25 +90,21 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
 
         logger?.LogDebug("{Content}", jsonNode?.ToJsonString(JsonSerializerOptions));
 
-        TData? data = null;
-
         switch (httpResponseMessage.StatusCode)
         {
             case HttpStatusCode.OK:
             case HttpStatusCode.Created:
                 var dataResponse = jsonNode.Deserialize<DataResponse<TData>>(JsonSerializerOptions) ??
                                    throw new InvalidOperationException("Deserialized response is null.");
-                data = dataResponse.Data;
-                break;
+
+                return dataResponse.Data;
             case HttpStatusCode.NotFound:
-                break;
+                return null;
             default:
                 var errorResponse = jsonNode.Deserialize<ErrorResponse>(JsonSerializerOptions) ??
                                     throw new InvalidOperationException("Deserialized response is null.");
 
                 throw new YnabApiClientError(errorResponse.Error.Id, errorResponse.Error.Name, errorResponse.Error.Detail);
         }
-
-        return data;
     }
 }

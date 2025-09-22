@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 
-using mmazur.YnabApiClient.Extensions;
 using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Transactions;
@@ -13,10 +12,9 @@ internal sealed class YnabV1ScheduledTransactionsApiClient(IHttpClientFactory ht
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourcesUri = new(baseUri, "scheduled_transactions/");
-    private readonly Dictionary<Guid, IYnabV1ScheduledTransactionApiClient> _scheduledTransactionClients = [];
 
     public IYnabV1ScheduledTransactionApiClient this[Guid scheduledTransactionId] =>
-        _scheduledTransactionClients.GetOrAdd(scheduledTransactionId, () => new YnabV1ScheduledTransactionApiClient(_httpClientFactory, _logger, _resourcesUri, scheduledTransactionId, bearerToken));
+        new YnabV1ScheduledTransactionApiClient(_httpClientFactory, _logger, _resourcesUri, scheduledTransactionId, bearerToken);
 
     public Task<ScheduledTransactionsResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<ScheduledTransactionsResponse>(_resourcesUri, bearerToken, cancellationToken);

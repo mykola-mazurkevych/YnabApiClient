@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 
-using mmazur.YnabApiClient.Extensions;
 using mmazur.YnabApiClient.Infrastructure;
 using mmazur.YnabApiClient.V1.Interfaces.Transactions;
 using mmazur.YnabApiClient.V1.Models.Transactions;
@@ -13,10 +12,9 @@ internal sealed class YnabV1TransactionsApiClient(IHttpClientFactory httpClientF
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourcesUri = new(baseUri, "transactions/");
-    private readonly Dictionary<string, IYnabV1TransactionApiClient> _transactionClients = [];
 
     public IYnabV1TransactionApiClient this[string transactionsId] =>
-        _transactionClients.GetOrAdd(transactionsId, () => new YnabV1TransactionApiClient(_httpClientFactory, _logger, _resourcesUri, transactionsId, bearerToken));
+        new YnabV1TransactionApiClient(_httpClientFactory, _logger, _resourcesUri, transactionsId, bearerToken);
 
     public Task<TransactionsResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<TransactionsResponse>(_resourcesUri, bearerToken, cancellationToken);
