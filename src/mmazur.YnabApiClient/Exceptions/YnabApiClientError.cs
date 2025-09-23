@@ -1,8 +1,18 @@
-﻿namespace mmazur.YnabApiClient.Exceptions;
+﻿#pragma warning disable CA1710 // Identifiers should have correct syntax
+#pragma warning disable CA1032 // Implement standard exception constructors
 
-public sealed class YnabApiClientError(string id, string name, string detail) : Exception
+namespace mmazur.YnabApiClient.Exceptions;
+
+public sealed class YnabApiClientError : Exception
 {
-    public string Id { get; } = id;
-    public string Name { get; } = name;
-    public string Detail { get; } = detail;
+    internal YnabApiClientError(string id, string name, string detail)
+    {
+        this.Id = id;
+        this.Name = name;
+        this.Detail = detail;
+    }
+
+    public string Id { get; }
+    public string Name { get; }
+    public string Detail { get; }
 }

@@ -1,4 +1,5 @@
-﻿#pragma warning disable CS9113 // Parameter is unused
+﻿#pragma warning disable CA1812 // Avoid uninstantiated internal classes
+#pragma warning disable CS9113 // Parameter is unused
 
 namespace mmazur.YnabApiClient.Sample;
 

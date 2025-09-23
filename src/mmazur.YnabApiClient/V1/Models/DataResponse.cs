@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿#pragma warning disable CA1812 // Avoid uninstantiated internal classes
+
+using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Models;
 
