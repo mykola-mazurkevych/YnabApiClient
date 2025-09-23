@@ -1,4 +1,6 @@
-﻿#pragma warning disable IDE0010 // Add missing cases
+﻿#pragma warning disable CA1848 // Use the LoggerMessage delegates
+#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
+#pragma warning disable IDE0010 // Add missing cases
 
 using System.Net;
 using System.Net.Http.Headers;

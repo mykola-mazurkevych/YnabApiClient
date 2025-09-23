@@ -28,6 +28,6 @@ internal sealed class YnabV1BudgetsApiClient(IHttpClientFactory httpClientFactor
     public Task<BudgetSummaryResponse?> GetAsync(bool includeAccounts, CancellationToken cancellationToken = default) =>
         this.GetAsync<BudgetSummaryResponse>(_resourcesUri, new { include_accounts = includeAccounts }, bearerToken, cancellationToken);
 
-    private IYnabV1BudgetApiClient GetBudgetApiClient(BudgetType budgetType) =>
-        new YnabV1BudgetApiClient(_httpClientFactory, _logger, _resourcesUri, budgetType, bearerToken);
+    private YnabV1BudgetApiClient GetBudgetApiClient(BudgetType budgetType) =>
+        new (_httpClientFactory, _logger, _resourcesUri, budgetType, bearerToken);
 }

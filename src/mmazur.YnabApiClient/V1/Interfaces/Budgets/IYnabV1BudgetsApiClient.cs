@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CA1043 // Use integral or string argument for indexers
+#pragma warning disable CA1716 // Identifiers should not match keywords
 
 using mmazur.YnabApiClient.V1.Models.Budgets;
 
