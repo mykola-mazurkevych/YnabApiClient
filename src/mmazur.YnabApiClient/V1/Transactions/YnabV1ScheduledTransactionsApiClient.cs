@@ -1,0 +1,26 @@
+﻿using Microsoft.Extensions.Logging;
+
+using mmazur.YnabApiClient.V1.Common;
+using mmazur.YnabApiClient.V1.Transactions.Models;
+
+namespace mmazur.YnabApiClient.V1.Transactions;
+
+internal sealed class YnabV1ScheduledTransactionsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
+    : YnabApiClientBase(httpClientFactory, logger), IYnabV1ScheduledTransactionsApiClient
+{
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
+    private readonly ILogger? _logger = logger;
+    private readonly Uri _resourcesUri = new(baseUri, "scheduled_transactions/");
+
+    public IYnabV1ScheduledTransactionApiClient this[Guid scheduledTransactionId] =>
+        new YnabV1ScheduledTransactionApiClient(_httpClientFactory, _logger, _resourcesUri, scheduledTransactionId, bearerToken);
+
+    public Task<ScheduledTransactionsResponse?> GetAsync(CancellationToken cancellationToken = default) =>
+        this.GetAsync<ScheduledTransactionsResponse>(_resourcesUri, bearerToken, cancellationToken);
+
+    public Task<ScheduledTransactionsResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default) =>
+        this.GetAsync<ScheduledTransactionsResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, bearerToken, cancellationToken);
+
+    public Task<ScheduledTransactionResponse> CreateAsync(SaveScheduledTransaction scheduledTransaction, CancellationToken cancellationToken = default) =>
+        this.PostAsync<ScheduledTransactionResponse>(_resourcesUri, new PostScheduledTransactionWrapper { ScheduledTransaction = scheduledTransaction }, bearerToken, cancellationToken);
+}
