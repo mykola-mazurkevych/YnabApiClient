@@ -14,9 +14,9 @@ internal sealed class YnabV1MonthApiClient(IHttpClientFactory httpClientFactory,
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourceUri = new(baseUri, $"{month}/");
 
-    public IYnabV1CategoriesApiClient Categories => new YnabV1CategoriesApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
+    public IYnabV1CategoriesGetApiClient Categories => new YnabV1CategoriesApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
-    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
+    public IYnabV1TransactionsGetApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
     public Task<MonthDetailResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<MonthDetailResponse>(_resourceUri, bearerToken, cancellationToken);

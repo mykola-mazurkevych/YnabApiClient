@@ -13,7 +13,7 @@ internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFacto
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourceUri = new(baseUri, $"{categoryId}/");
 
-    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
+    public IYnabV1TransactionsGetApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
     public Task<CategoryResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<CategoryResponse>(_resourceUri, bearerToken, cancellationToken);
