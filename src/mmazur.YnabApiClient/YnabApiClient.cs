@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-using mmazur.YnabApiClient.V1.Clients;
-using mmazur.YnabApiClient.V1.Interfaces;
+using mmazur.YnabApiClient.V1;
 
 namespace mmazur.YnabApiClient;
 
