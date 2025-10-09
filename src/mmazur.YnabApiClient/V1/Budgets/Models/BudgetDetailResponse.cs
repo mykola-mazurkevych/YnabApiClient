@@ -11,10 +11,9 @@ public sealed record BudgetDetailResponse
     {
     }
 
-    [JsonInclude]
-    [JsonPropertyName("budgets")]
+    [JsonPropertyName("budget")]
     [JsonRequired]
-    private List<BudgetDetail> _budgets = [];
+    public required BudgetDetail Budget { get; init; }
 
     /// <summary>
     /// The knowledge of the server
@@ -22,7 +21,4 @@ public sealed record BudgetDetailResponse
     [JsonPropertyName("server_knowledge")]
     [JsonRequired]
     public required long ServerKnowledge { get; init; }
-
-    [JsonIgnore]
-    public IReadOnlyList<BudgetDetail> Budgets => _budgets.AsReadOnly();
 }
