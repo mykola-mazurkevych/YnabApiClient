@@ -12,10 +12,12 @@ public sealed record PayeeLocation
     [JsonRequired]
     public required Guid PayeeId { get; init; }
 
+    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     [JsonPropertyName("latitude")]
     [JsonRequired]
     public required double Latitude { get; init; }
 
+    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     [JsonPropertyName("longitude")]
     [JsonRequired]
     public required double Longitude { get; init; }

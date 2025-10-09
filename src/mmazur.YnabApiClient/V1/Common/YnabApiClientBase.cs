@@ -57,7 +57,7 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
 
     protected Task<TData> DeleteAsync<TData>(Uri uri, string bearerToken, CancellationToken cancellationToken)
         where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Put, uri, queryParameters: null, content: null, bearerToken, cancellationToken)
+        this.SendAsync<TData>(HttpMethod.Delete, uri, queryParameters: null, content: null, bearerToken, cancellationToken)
             .ContinueWith(task => task.Result ?? throw new InvalidOperationException($"The {HttpMethod.Delete} should not return null data."), TaskScheduler.Current);
 
     private async Task<TData?> SendAsync<TData>(HttpMethod httpMethod, Uri uri, object? queryParameters, object? content, string bearerToken, CancellationToken cancellationToken)
@@ -71,7 +71,7 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
 
         using var httpRequestMessage = new HttpRequestMessage(httpMethod, requestUri);
 
-        logger?.LogDebug("Sending {Method} to {Uri}", httpMethod, uri);
+        logger?.LogDebug("Sending {Method} to {Uri}", httpMethod, requestUri);
 
         if (content is not null)
         {
