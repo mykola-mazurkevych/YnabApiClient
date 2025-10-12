@@ -7,8 +7,9 @@ using mmazur.YnabApiClient.V1.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Payees;
 
-internal sealed class YnabV1PayeeApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid payeeId, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1PayeeApiClient
+internal sealed class YnabV1PayeeApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid payeeId, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1PayeeApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;

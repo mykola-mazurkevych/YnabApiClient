@@ -96,6 +96,7 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
         {
             case HttpStatusCode.OK:
             case HttpStatusCode.Created:
+            case (HttpStatusCode)209:
                 var dataResponse = jsonNode.Deserialize<DataResponse<TData>>(JsonSerializerOptions) ??
                                    throw new InvalidOperationException("Deserialized response is null.");
 

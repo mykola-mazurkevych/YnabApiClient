@@ -5,8 +5,9 @@ using mmazur.YnabApiClient.V1.Common;
 
 namespace mmazur.YnabApiClient.V1.Budgets;
 
-internal sealed class YnabV1BudgetSettingsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1BudgetSettingsApiClient
+internal sealed class YnabV1BudgetSettingsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1BudgetSettingsApiClient
 {
     private readonly Uri _resourceUri = new(baseUri, "settings/");
 

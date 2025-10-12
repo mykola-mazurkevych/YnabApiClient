@@ -11,16 +11,17 @@ using mmazur.YnabApiClient.V1.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Budgets;
 
-internal sealed class YnabV1BudgetApiClient
-    : YnabApiClientBase, IYnabV1BudgetApiClient
+internal sealed class YnabV1BudgetApiClient :
+    YnabApiClientBase,
+    IYnabV1BudgetApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger? _logger;
     private readonly Uri _resourceUri;
     private readonly string _bearerToken;
 
-    public YnabV1BudgetApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid budgetId, string bearerToken)
-        : base(httpClientFactory, logger)
+    public YnabV1BudgetApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid budgetId, string bearerToken) :
+        base(httpClientFactory, logger)
     {
         _httpClientFactory = httpClientFactory;
         _logger = logger;
@@ -28,8 +29,8 @@ internal sealed class YnabV1BudgetApiClient
         _bearerToken = bearerToken;
     }
 
-    public YnabV1BudgetApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, BudgetType budgetType, string bearerToken)
-        : base(httpClientFactory, logger)
+    public YnabV1BudgetApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, BudgetType budgetType, string bearerToken) :
+        base(httpClientFactory, logger)
     {
         _httpClientFactory = httpClientFactory;
         _logger = logger;
