@@ -7,14 +7,15 @@ using mmazur.YnabApiClient.V1.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Months;
 
-internal sealed class YnabV1MonthApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, DateOnly month, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1MonthApiClient
+internal sealed class YnabV1MonthApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, DateOnly month, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1MonthApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourceUri = new(baseUri, $"{month}/");
 
-    public IYnabV1CategoriesGetApiClient Categories => new YnabV1CategoriesApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
+    public IYnabV1CategoriesCategoryApiClient Categories => new YnabV1CategoriesApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
     public IYnabV1TransactionsGetApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 

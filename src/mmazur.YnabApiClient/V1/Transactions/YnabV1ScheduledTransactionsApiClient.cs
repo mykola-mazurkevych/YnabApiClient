@@ -5,8 +5,9 @@ using mmazur.YnabApiClient.V1.Transactions.Models;
 
 namespace mmazur.YnabApiClient.V1.Transactions;
 
-internal sealed class YnabV1ScheduledTransactionsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1ScheduledTransactionsApiClient
+internal sealed class YnabV1ScheduledTransactionsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1ScheduledTransactionsApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;

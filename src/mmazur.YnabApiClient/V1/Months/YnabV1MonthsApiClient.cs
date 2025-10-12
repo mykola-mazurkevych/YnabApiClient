@@ -5,8 +5,9 @@ using mmazur.YnabApiClient.V1.Months.Models;
 
 namespace mmazur.YnabApiClient.V1.Months;
 
-internal sealed class YnabV1MonthsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1MonthsApiClient
+internal sealed class YnabV1MonthsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1MonthsApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;

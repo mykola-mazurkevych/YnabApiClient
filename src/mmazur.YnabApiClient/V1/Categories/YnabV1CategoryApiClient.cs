@@ -6,8 +6,9 @@ using mmazur.YnabApiClient.V1.Transactions;
 
 namespace mmazur.YnabApiClient.V1.Categories;
 
-internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid categoryId, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1CategoryApiClient
+internal sealed class YnabV1CategoryApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, Guid categoryId, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1CategoryApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;

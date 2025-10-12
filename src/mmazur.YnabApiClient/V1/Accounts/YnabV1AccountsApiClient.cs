@@ -5,8 +5,9 @@ using mmazur.YnabApiClient.V1.Common;
 
 namespace mmazur.YnabApiClient.V1.Accounts;
 
-internal sealed class YnabV1AccountsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
-    : YnabApiClientBase(httpClientFactory, logger), IYnabV1AccountsApiClient
+internal sealed class YnabV1AccountsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
+    YnabApiClientBase(httpClientFactory, logger),
+    IYnabV1AccountsApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;

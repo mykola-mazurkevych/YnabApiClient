@@ -5,8 +5,8 @@ using mmazur.YnabApiClient.V1.Users;
 
 namespace mmazur.YnabApiClient.V1;
 
-internal sealed class YnabV1ApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken)
-    : IYnabV1ApiClient
+internal sealed class YnabV1ApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
+    IYnabV1ApiClient
 {
     private readonly Uri _baseUri = new(baseUri, "v1/");
 
