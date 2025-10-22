@@ -1,8 +1,14 @@
-﻿using mmazur.YnabApiClient.V1.PayeeLocations;
+﻿using mmazur.YnabApiClient.V1.PayeeLocations.Models;
 
 namespace mmazur.YnabApiClient.V1.Payees;
 
-public interface IYnabV1PayeePayeeLocationsApiClient
+public interface IYnabV1PayeeLocationsGetApiClient
 {
-    IYnabV1PayeeLocationsGetApiClient Locations { get; }
+    /// <summary>
+    /// List payee locations
+    /// Returns all payee locations
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<PayeeLocationsResponse?> GetAsync(CancellationToken cancellationToken = default);
 }

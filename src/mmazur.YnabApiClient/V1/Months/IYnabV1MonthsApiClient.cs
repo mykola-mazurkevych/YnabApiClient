@@ -1,5 +1,25 @@
-﻿namespace mmazur.YnabApiClient.V1.Months;
+﻿using mmazur.YnabApiClient.V1.Months.Models;
 
-public interface IYnabV1MonthsApiClient :
-    IYnabV1MonthsGetApiClient,
-    IYnabV1MonthsMonthApiClient;
+namespace mmazur.YnabApiClient.V1.Months;
+
+public interface IYnabV1MonthsApiClient
+{
+    IYnabV1MonthApiClient this[DateOnly month] { get; }
+
+    /// <summary>
+    /// List budget months
+    /// Returns all budget months
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<MonthSummariesResponse?> GetAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// List budget months
+    /// Returns all budget months
+    /// </summary>
+    /// <param name="lastKnowledgeOfServer">The starting server knowledge. If provided, only entities that have changed since last_knowledge_of_server will be included.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<MonthSummariesResponse?> GetAsync(long lastKnowledgeOfServer, CancellationToken cancellationToken = default);
+}

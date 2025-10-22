@@ -1,3 +1,4 @@
+using mmazur.YnabApiClient.V1.Categories.Models;
 using mmazur.YnabApiClient.V1.Months;
 
 using Xunit;
@@ -37,6 +38,18 @@ public sealed class YnabV1MonthApiClientTests :
 
         Assert.NotNull(categoryResponse);
         Assert.NotNull(categoryResponse.Category);
+    }
+
+    [Fact(DisplayName = "Update Month Category")]
+    public async Task Category_UpdateAsync_ShouldSucceed()
+    {
+        var categoryId = this.Faker.Generate<Guid>();
+        var saveMonthCategory = this.Faker.Generate<SaveMonthCategory>();
+
+        var saveCategoryResponse = await _ynabV1MonthApiClient.Categories[categoryId].UpdateAsync(saveMonthCategory);
+
+        Assert.NotNull(saveCategoryResponse);
+        Assert.NotNull(saveCategoryResponse.Category);
     }
 
     [Fact(DisplayName = "Get Month Transactions")]

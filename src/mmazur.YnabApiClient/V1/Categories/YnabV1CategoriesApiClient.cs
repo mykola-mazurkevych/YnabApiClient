@@ -7,13 +7,17 @@ namespace mmazur.YnabApiClient.V1.Categories;
 
 internal sealed class YnabV1CategoriesApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
     YnabApiClientBase(httpClientFactory, logger),
-    IYnabV1CategoriesApiClient
+    IYnabV1CategoriesApiClient,
+    IYnabV1MonthCategoriesApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourcesUri = new(baseUri, "categories/");
 
     public IYnabV1CategoryApiClient this[Guid categoryId] =>
+        new YnabV1CategoryApiClient(_httpClientFactory, _logger, _resourcesUri, categoryId, bearerToken);
+
+    IYnabV1MonthCategoryApiClient IYnabV1MonthCategoriesApiClient.this[Guid categoryId] =>
         new YnabV1CategoryApiClient(_httpClientFactory, _logger, _resourcesUri, categoryId, bearerToken);
 
     public Task<CategoriesResponse?> GetAsync(CancellationToken cancellationToken = default) =>

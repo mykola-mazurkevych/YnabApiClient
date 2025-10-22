@@ -38,19 +38,29 @@ internal sealed class YnabV1BudgetApiClient :
         _bearerToken = bearerToken;
     }
 
-    public IYnabV1AccountsApiClient Accounts => new YnabV1AccountsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+    public IYnabV1BudgetSettingsApiClient Settings =>
+        new YnabV1BudgetSettingsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
 
-    public IYnabV1CategoriesApiClient Categories => new YnabV1CategoriesApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+    public IYnabV1AccountsApiClient Accounts =>
+        new YnabV1AccountsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
 
-    public IYnabV1MonthsApiClient Months => new YnabV1MonthsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+    public IYnabV1CategoriesApiClient Categories =>
+        new YnabV1CategoriesApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
 
-    public IYnabV1PayeesApiClient Payees => new YnabV1PayeesApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
-    public IYnabV1PayeeLocationsApiClient PayeeLocations => new YnabV1PayeeLocationsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+    public IYnabV1MonthsApiClient Months =>
+        new YnabV1MonthsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
 
-    public IYnabV1ScheduledTransactionsApiClient ScheduledTransactions => new YnabV1ScheduledTransactionsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
-    public IYnabV1TransactionsApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+    public IYnabV1PayeesApiClient Payees =>
+        new YnabV1PayeesApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
 
-    public IYnabV1BudgetSettingsApiClient Settings => new YnabV1BudgetSettingsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+    public IYnabV1PayeeLocationsApiClient PayeeLocations =>
+        new YnabV1PayeeLocationsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+
+    public IYnabV1ScheduledTransactionsApiClient ScheduledTransactions =>
+        new YnabV1ScheduledTransactionsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
+
+    public IYnabV1TransactionsApiClient Transactions =>
+        new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, _bearerToken);
 
     public Task<BudgetDetailResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<BudgetDetailResponse>(_resourceUri, _bearerToken, cancellationToken);

@@ -15,9 +15,11 @@ internal sealed class YnabV1PayeeApiClient(IHttpClientFactory httpClientFactory,
     private readonly ILogger? _logger = logger;
     private readonly Uri _resourceUri = new(baseUri, $"{payeeId}/");
 
-    public IYnabV1PayeeLocationsGetApiClient Locations => new YnabV1PayeeLocationsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
+    public IYnabV1PayeeLocationsGetApiClient Locations =>
+        new YnabV1PayeeLocationsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
-    public IYnabV1TransactionsGetApiClient Transactions => new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
+    public IYnabV1TransactionsGetApiClient Transactions =>
+        new YnabV1TransactionsApiClient(_httpClientFactory, _logger, _resourceUri, bearerToken);
 
     public Task<PayeeResponse?> GetAsync(CancellationToken cancellationToken = default) =>
         this.GetAsync<PayeeResponse>(_resourceUri, bearerToken, cancellationToken);
