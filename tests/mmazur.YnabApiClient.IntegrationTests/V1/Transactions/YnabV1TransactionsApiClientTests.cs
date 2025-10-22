@@ -153,4 +153,13 @@ public sealed class YnabV1TransactionsApiClientTests :
         Assert.NotNull(saveTransactionsResponse);
         Assert.NotNull(saveTransactionsResponse.Transactions);
     }
+
+    ////[Fact(DisplayName = "Import Transactions")]
+    ////public async Task ImportAsync_ShouldSucceed()
+    ////{
+    ////    var transactionsImportResponse = await _ynabV1TransactionsApiClient.ImportAsync([]);
+
+    ////    Assert.NotNull(transactionsImportResponse);
+    ////    Assert.NotNull(transactionsImportResponse.TransactionIds);
+    ////}
 }

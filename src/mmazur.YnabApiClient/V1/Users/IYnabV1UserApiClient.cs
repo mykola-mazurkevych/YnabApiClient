@@ -1,4 +1,14 @@
-﻿namespace mmazur.YnabApiClient.V1.Users;
+﻿using mmazur.YnabApiClient.V1.Users.Models;
 
-public interface IYnabV1UserApiClient :
-    IYnabV1UserGetApiClient;
+namespace mmazur.YnabApiClient.V1.Users;
+
+public interface IYnabV1UserApiClient
+{
+    /// <summary>
+    /// User info
+    /// Returns authenticated user information
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<UserResponse?> GetAsync(CancellationToken cancellationToken = default);
+}

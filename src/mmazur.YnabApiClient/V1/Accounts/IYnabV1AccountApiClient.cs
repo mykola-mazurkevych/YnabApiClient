@@ -1,5 +1,17 @@
-﻿namespace mmazur.YnabApiClient.V1.Accounts;
+﻿using mmazur.YnabApiClient.V1.Accounts.Models;
+using mmazur.YnabApiClient.V1.Transactions;
 
-public interface IYnabV1AccountApiClient :
-    IYnabV1AccountGetApiClient,
-    IYnabV1AccountTransactionsApiClient;
+namespace mmazur.YnabApiClient.V1.Accounts;
+
+public interface IYnabV1AccountApiClient
+{
+    IYnabV1TransactionsGetApiClient Transactions { get; }
+
+    /// <summary>
+    /// Single account
+    /// Returns a single account
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<AccountResponse?> GetAsync(CancellationToken cancellationToken = default);
+}

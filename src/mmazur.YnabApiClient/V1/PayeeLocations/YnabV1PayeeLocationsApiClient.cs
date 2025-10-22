@@ -2,12 +2,14 @@
 
 using mmazur.YnabApiClient.V1.Common;
 using mmazur.YnabApiClient.V1.PayeeLocations.Models;
+using mmazur.YnabApiClient.V1.Payees;
 
 namespace mmazur.YnabApiClient.V1.PayeeLocations;
 
 internal sealed class YnabV1PayeeLocationsApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
     YnabApiClientBase(httpClientFactory, logger),
-    IYnabV1PayeeLocationsApiClient
+    IYnabV1PayeeLocationsApiClient,
+    IYnabV1PayeeLocationsGetApiClient
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger? _logger = logger;
