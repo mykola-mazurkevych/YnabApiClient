@@ -1,4 +1,4 @@
-﻿#pragma warning disable CA1303 // Do not pass literals as localized parameters
+﻿#pragma warning disable CA1303  // Do not pass literals as localized parameters
 #pragma warning disable IDE0055 // Fix formatting
 
 using System.Globalization;
@@ -24,4 +24,8 @@ var serviceProvider = new ServiceCollection()
     .AddYnabApiClient()
     .BuildServiceProvider();
 
-await serviceProvider.GetRequiredService<IApplication>().RunAsync().ConfigureAwait(false);
+var app = serviceProvider.GetRequiredService<IApplication>();
+
+await app.RunAsync().ConfigureAwait(false);
+
+Environment.Exit(0);

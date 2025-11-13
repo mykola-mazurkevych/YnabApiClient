@@ -3,7 +3,7 @@
 
 # Microsoft .NET properties
 csharp_new_line_before_members_in_object_initializers = false
-csharp_preferred_modifier_order = public, protected, private, internal, file, static, extern, new, virtual, readonly, required, sealed, override, unsafe, async, volatile, abstract:suggestion
+csharp_preferred_modifier_order = public, protected, internal, sealed, file, static, extern, new, virtual, readonly, required, private, override, unsafe, async, volatile, abstract:suggestion
 dotnet_separate_import_directive_groups = true
 dotnet_style_qualification_for_event = true:suggestion
 dotnet_style_qualification_for_field = false:suggestion
@@ -14,10 +14,11 @@ dotnet_style_qualification_for_property = true:suggestion
 resharper_blank_lines_after_multiline_statements = 1
 resharper_blank_lines_around_single_line_field = 0
 resharper_blank_lines_around_single_line_property = 1
-resharper_blank_lines_before_block_statements = 0
-resharper_blank_lines_before_multiline_statements = 1
+resharper_blank_lines_before_block_statements = 1
+resharper_blank_lines_before_multiline_statements = 0
 resharper_csharp_blank_lines_around_single_line_field = 0
 resharper_csharp_max_line_length = 200
+resharper_int_align_comments = true
 resharper_keep_existing_initializer_arrangement = true
 resharper_method_or_operator_body = expression_body
 resharper_place_accessorholder_attribute_on_same_line = false
@@ -43,7 +44,7 @@ csharp_style_expression_bodied_lambdas = true:silent
 csharp_style_expression_bodied_local_functions = false:silent
 resharper_use_heuristics_for_body_style = true
 resharper_wrap_chained_binary_expressions = chop_if_long
-resharper_wrap_object_and_collection_initializer_style = chop_if_long
+resharper_wrap_object_and_collection_initializer_style = chop_always
 csharp_style_throw_expression = true:suggestion
 csharp_style_prefer_null_check_over_type_check = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
