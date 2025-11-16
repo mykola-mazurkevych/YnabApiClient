@@ -52,6 +52,6 @@ internal sealed class YnabV1TransactionsApiClient(IHttpClientFactory httpClientF
     public Task<SaveTransactionsResponse> UpdateAsync(IEnumerable<SaveTransactionWithIdOrImportId> transactions, CancellationToken cancellationToken = default) =>
         this.PatchAsync<SaveTransactionsResponse>(_resourcesUri, new PatchTransactionsWrapper { Transactions = transactions }, bearerToken, cancellationToken);
 
-    public Task<TransactionsImportResponse> ImportAsync(IEnumerable<object> transactions, CancellationToken cancellationToken = default) =>
-        throw new NotImplementedException();
+    public Task<TransactionsImportResponse> ImportAsync(CancellationToken cancellationToken = default) =>
+        this.PostAsync<TransactionsImportResponse>(new Uri(_resourcesUri, "import"), new { }, bearerToken, cancellationToken);
 }
