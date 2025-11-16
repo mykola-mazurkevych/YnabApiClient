@@ -63,9 +63,7 @@ public interface IYnabV1TransactionsApiClient : IYnabV1TransactionsGetApiClient
     /// Sending a request to this endpoint is the equivalent of clicking "Import" on each account in the web application or tapping the "New Transactions" banner in the mobile applications.
     /// The response for this endpoint contains the transaction ids that have been imported.
     /// </summary>
-    /// <param name="transactions"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    // TODO: Investigate data to be sent (collection of transactions, file, etc.)
-    Task<TransactionsImportResponse> ImportAsync(IEnumerable<object> transactions, CancellationToken cancellationToken = default);
+    Task<TransactionsImportResponse> ImportAsync(CancellationToken cancellationToken = default);
 }
