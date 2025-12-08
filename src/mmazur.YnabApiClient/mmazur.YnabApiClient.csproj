@@ -1,6 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>mmazur.YnabApiClient</PackageId>
+    <Version>1.0.0-alpha</Version>
+    <Title>YnabApiClient</Title>
+    <Description>Client library for the YNAB API.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <NoWarn>
       CA1043 <!--Use integral or string argument for indexers-->;
     </NoWarn>
