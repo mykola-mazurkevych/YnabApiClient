@@ -27,8 +27,7 @@ public sealed class YnabApiClientTestsFixture : IAsyncLifetime
             throw new FileNotFoundException($"OpenAPI specification file {openApiSpecFileInfo.Name} not found");
         }
 
-        _prismContainer = new ContainerBuilder()
-            .WithImage("stoplight/prism:latest")
+        _prismContainer = new ContainerBuilder("stoplight/prism:latest")
             .WithBindMount(openApiSpecFileInfo.FullName, $"/tmp/{openApiSpecFileInfo.Name}", AccessMode.ReadOnly)
             .WithCommand("mock", "-h", "0.0.0.0", $"/tmp/{openApiSpecFileInfo.Name}")
             .WithPortBinding(Port, assignRandomHostPort: true)

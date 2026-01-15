@@ -12,6 +12,5 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/mmazur.YnabApiClient.IntegrationTests/mmazur.YnabApiClient.IntegrationTests.csproj" />
-    <Project Path="tests/mmazur.YnabApiClient.UnitTests/mmazur.YnabApiClient.UnitTests.csproj" />
   </Folder>
 </Solution>
