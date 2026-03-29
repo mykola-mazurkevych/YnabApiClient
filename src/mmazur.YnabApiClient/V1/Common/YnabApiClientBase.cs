@@ -71,26 +71,40 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
 
         using var httpRequestMessage = new HttpRequestMessage(httpMethod, requestUri);
 
-        logger?.LogDebug("Sending {Method} to {Uri}", httpMethod, requestUri);
+        if (logger is not null)
+        {
+            YnabApiClientBaseLogMessages.SendingRequest(logger, httpMethod, requestUri);
+        }
 
         if (content is not null)
         {
             var jsonContent = JsonSerializer.Serialize(content, JsonSerializerOptions);
 
-            logger?.LogDebug("{Content}", jsonContent);
+            if (logger is not null)
+            {
+                YnabApiClientBaseLogMessages.Content(logger, jsonContent);
+            }
 
             httpRequestMessage.Content = new StringContent(jsonContent, Encoding.UTF8, JsonContentType);
         }
 
         using var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage, cancellationToken).ConfigureAwait(false);
 
-        logger?.LogDebug("Received {StatusCode}", httpResponseMessage.StatusCode);
+        if (logger is not null)
+        {
+            YnabApiClientBaseLogMessages.ReceivedStatusCode(logger, httpResponseMessage.StatusCode);
+        }
 
         await using var responseContent = await httpResponseMessage.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
         var jsonNode = await JsonNode.ParseAsync(responseContent, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-        logger?.LogDebug("{Content}", jsonNode?.ToJsonString(JsonSerializerOptions));
+        if (logger?.IsEnabled(LogLevel.Debug) == true)
+        {
+            var responseContentJson = jsonNode?.ToJsonString(JsonSerializerOptions);
+
+            YnabApiClientBaseLogMessages.Content(logger, responseContentJson);
+        }
 
         switch (httpResponseMessage.StatusCode)
         {
@@ -110,4 +124,16 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
                 throw new YnabApiClientException(errorResponse.Error.Id, errorResponse.Error.Name, errorResponse.Error.Detail);
         }
     }
+}
+
+internal static partial class YnabApiClientBaseLogMessages
+{
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Sending {Method} to {Uri}")]
+    public static partial void SendingRequest(ILogger logger, HttpMethod method, Uri uri);
+
+    [LoggerMessage(Level = LogLevel.Debug, Message = "{Content}")]
+    public static partial void Content(ILogger logger, string? content);
+
+    [LoggerMessage(Level = LogLevel.Debug, Message = "Received {StatusCode}")]
+    public static partial void ReceivedStatusCode(ILogger logger, HttpStatusCode statusCode);
 }
