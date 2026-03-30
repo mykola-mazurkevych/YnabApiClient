@@ -40,25 +40,37 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
         where TData : class =>
         this.SendAsync<TData>(HttpMethod.Get, uri, queryParameters, content: null, bearerToken, cancellationToken);
 
-    protected Task<TData> PostAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
-        where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Post, uri, queryParameters: null, content: content, bearerToken, cancellationToken)
-            .ContinueWith(task => task.Result ?? throw new InvalidOperationException($"The {HttpMethod.Post} should not return null data."), TaskScheduler.Current);
+    protected async Task<TData> PostAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
+        where TData : class
+    {
+        var data = await this.SendAsync<TData>(HttpMethod.Post, uri, queryParameters: null, content: content, bearerToken, cancellationToken).ConfigureAwait(false);
 
-    protected Task<TData> PatchAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
-        where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Patch, uri, queryParameters: null, content: content, bearerToken, cancellationToken)
-            .ContinueWith(task => task.Result ?? throw new InvalidOperationException($"The {HttpMethod.Patch} should not return null data."), TaskScheduler.Current);
+        return data ?? throw new InvalidOperationException($"The {HttpMethod.Post} should not return null data.");
+    }
 
-    protected Task<TData> PutAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
-        where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Put, uri, queryParameters: null, content: content, bearerToken, cancellationToken)
-            .ContinueWith(task => task.Result ?? throw new InvalidOperationException($"The {HttpMethod.Put} should not return null data."), TaskScheduler.Current);
+    protected async Task<TData> PatchAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
+        where TData : class
+    {
+        var data = await this.SendAsync<TData>(HttpMethod.Patch, uri, queryParameters: null, content: content, bearerToken, cancellationToken).ConfigureAwait(false);
 
-    protected Task<TData> DeleteAsync<TData>(Uri uri, string bearerToken, CancellationToken cancellationToken)
-        where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Delete, uri, queryParameters: null, content: null, bearerToken, cancellationToken)
-            .ContinueWith(task => task.Result ?? throw new InvalidOperationException($"The {HttpMethod.Delete} should not return null data."), TaskScheduler.Current);
+        return data ?? throw new InvalidOperationException($"The {HttpMethod.Patch} should not return null data.");
+    }
+
+    protected async Task<TData> PutAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
+        where TData : class
+    {
+        var data = await this.SendAsync<TData>(HttpMethod.Put, uri, queryParameters: null, content: content, bearerToken, cancellationToken).ConfigureAwait(false);
+
+        return data ?? throw new InvalidOperationException($"The {HttpMethod.Put} should not return null data.");
+    }
+
+    protected async Task<TData> DeleteAsync<TData>(Uri uri, string bearerToken, CancellationToken cancellationToken)
+        where TData : class
+    {
+        var data = await this.SendAsync<TData>(HttpMethod.Delete, uri, queryParameters: null, content: null, bearerToken, cancellationToken).ConfigureAwait(false);
+
+        return data ?? throw new InvalidOperationException($"The {HttpMethod.Delete} should not return null data.");
+    }
 
     private async Task<TData?> SendAsync<TData>(HttpMethod httpMethod, Uri uri, object? queryParameters, object? content, string bearerToken, CancellationToken cancellationToken)
         where TData : class
