@@ -14,10 +14,10 @@ public sealed class YnabV1TransactionApiClientTests :
     public YnabV1TransactionApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
-        var transactionId = this.Faker.Generate<Guid>().ToString();
+        var budgetId = Faker.Generate<Guid>();
+        var transactionId = Faker.Generate<Guid>().ToString();
 
-        _ynabV1TransactionApiClient = this.YnabApiClient.V1.Budgets[budgetId].Transactions[transactionId];
+        _ynabV1TransactionApiClient = YnabApiClient.V1.Budgets[budgetId].Transactions[transactionId];
     }
 
     [Fact(DisplayName = "Get Transaction")]
@@ -32,7 +32,7 @@ public sealed class YnabV1TransactionApiClientTests :
     [Fact(DisplayName = "Update Transaction")]
     public async Task UpdateAsync_ShouldSucceed()
     {
-        var existingTransaction = this.Faker.Generate<ExistingTransaction>();
+        var existingTransaction = Faker.Generate<ExistingTransaction>();
 
         var transactionResponse = await _ynabV1TransactionApiClient.UpdateAsync(existingTransaction);
 

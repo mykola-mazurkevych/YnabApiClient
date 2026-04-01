@@ -13,10 +13,10 @@ public sealed class YnabV1AccountApiClientTests :
     public YnabV1AccountApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
-        var accountId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
+        var accountId = Faker.Generate<Guid>();
 
-        _ynabV1AccountApiClient = this.YnabApiClient.V1.Budgets[budgetId].Accounts[accountId];
+        _ynabV1AccountApiClient = YnabApiClient.V1.Budgets[budgetId].Accounts[accountId];
     }
 
     [Fact(DisplayName = "Get Account")]

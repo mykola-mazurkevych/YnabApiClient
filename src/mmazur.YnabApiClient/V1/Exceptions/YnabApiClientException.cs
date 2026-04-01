@@ -6,9 +6,9 @@ public sealed class YnabApiClientException : Exception
 {
     internal YnabApiClientException(string id, string name, string detail)
     {
-        this.Id = id;
-        this.Name = name;
-        this.Detail = detail;
+        Id = id;
+        Name = name;
+        Detail = detail;
     }
 
     public string Id { get; }

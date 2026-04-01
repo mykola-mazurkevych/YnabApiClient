@@ -14,10 +14,10 @@ public sealed class YnabV1PayeeApiClientTests :
     public YnabV1PayeeApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
-        var payeeId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
+        var payeeId = Faker.Generate<Guid>();
 
-        _ynabV1PayeeApiClient = this.YnabApiClient.V1.Budgets[budgetId].Payees[payeeId];
+        _ynabV1PayeeApiClient = YnabApiClient.V1.Budgets[budgetId].Payees[payeeId];
     }
 
     [Fact(DisplayName = "Get Payee")]
@@ -32,7 +32,7 @@ public sealed class YnabV1PayeeApiClientTests :
     [Fact(DisplayName = "Update Payee")]
     public async Task UpdateAsync_ShouldSucceed()
     {
-        var savePayee = this.Faker.Generate<SavePayee>();
+        var savePayee = Faker.Generate<SavePayee>();
 
         var savePayeeResponse = await _ynabV1PayeeApiClient.UpdateAsync(savePayee);
 

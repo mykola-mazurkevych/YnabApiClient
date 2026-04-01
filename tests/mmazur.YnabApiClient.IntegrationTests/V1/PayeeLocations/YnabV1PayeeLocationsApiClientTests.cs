@@ -13,9 +13,9 @@ public sealed class YnabV1PayeeLocationsApiClientTests :
     public YnabV1PayeeLocationsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1PayeeLocationsApiClient = this.YnabApiClient.V1.Budgets[budgetId].PayeeLocations;
+        _ynabV1PayeeLocationsApiClient = YnabApiClient.V1.Budgets[budgetId].PayeeLocations;
     }
 
     [Fact(DisplayName = "Get Payee Locations")]

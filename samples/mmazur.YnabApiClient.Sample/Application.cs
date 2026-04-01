@@ -10,17 +10,17 @@ internal sealed class Application(IYnabApiClient ynabApiClient) : IApplication
 {
     public async Task RunAsync(CancellationToken cancellationToken = default)
     {
-        var budgetId = await this.GetBudgetIdAsync("test", cancellationToken).ConfigureAwait(false);
+        var budgetId = await GetBudgetIdAsync("test", cancellationToken).ConfigureAwait(false);
 
         var accountName = $"Test Account {DateTimeOffset.UtcNow.Ticks}";
-        var accountId = await this.GetAccountIdAsync(budgetId, accountName, cancellationToken).ConfigureAwait(false) ??
-                        await this.CreateAccountAsync(budgetId, accountName, cancellationToken).ConfigureAwait(false);
+        var accountId = await GetAccountIdAsync(budgetId, accountName, cancellationToken).ConfigureAwait(false) ??
+                        await CreateAccountAsync(budgetId, accountName, cancellationToken).ConfigureAwait(false);
 
-        var payeeId = await this.GetPayeeIdAsync(budgetId, cancellationToken).ConfigureAwait(false);
+        var payeeId = await GetPayeeIdAsync(budgetId, cancellationToken).ConfigureAwait(false);
 
-        var categoryId = await this.GetCategoryIdAsync(budgetId, cancellationToken).ConfigureAwait(false);
+        var categoryId = await GetCategoryIdAsync(budgetId, cancellationToken).ConfigureAwait(false);
 
-        await this.CreateTransactionAsync(budgetId, accountId, categoryId, payeeId, cancellationToken).ConfigureAwait(false);
+        await CreateTransactionAsync(budgetId, accountId, categoryId, payeeId, cancellationToken).ConfigureAwait(false);
     }
 
     private async Task<Guid> GetBudgetIdAsync(string name, CancellationToken cancellationToken)

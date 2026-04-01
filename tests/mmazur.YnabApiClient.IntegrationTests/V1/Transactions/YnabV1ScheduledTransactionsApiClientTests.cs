@@ -14,9 +14,9 @@ public sealed class YnabV1ScheduledTransactionsApiClientTests :
     public YnabV1ScheduledTransactionsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1ScheduledTransactionsApiClient = this.YnabApiClient.V1.Budgets[budgetId].ScheduledTransactions;
+        _ynabV1ScheduledTransactionsApiClient = YnabApiClient.V1.Budgets[budgetId].ScheduledTransactions;
     }
 
     [Fact(DisplayName = "Get Scheduled Transactions")]
@@ -42,7 +42,7 @@ public sealed class YnabV1ScheduledTransactionsApiClientTests :
     [Fact(DisplayName = "Create Scheduled Transaction")]
     public async Task CreateAsync_ShouldSucceed()
     {
-        var saveScheduledTransaction = this.Faker.Generate<SaveScheduledTransaction>();
+        var saveScheduledTransaction = Faker.Generate<SaveScheduledTransaction>();
 
         var scheduledTransactionResponse = await _ynabV1ScheduledTransactionsApiClient.CreateAsync(saveScheduledTransaction);
 

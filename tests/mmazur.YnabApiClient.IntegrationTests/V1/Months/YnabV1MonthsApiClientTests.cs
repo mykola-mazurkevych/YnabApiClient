@@ -13,9 +13,9 @@ public sealed class YnabV1MonthsApiClientTests :
     public YnabV1MonthsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1MonthsApiClient = this.YnabApiClient.V1.Budgets[budgetId].Months;
+        _ynabV1MonthsApiClient = YnabApiClient.V1.Budgets[budgetId].Months;
     }
 
     [Fact(DisplayName = "Get Months")]

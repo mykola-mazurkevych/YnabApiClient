@@ -14,10 +14,10 @@ public sealed class YnabV1CategoryApiClientTests :
     public YnabV1CategoryApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
-        var categoryId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
+        var categoryId = Faker.Generate<Guid>();
 
-        _ynabV1CategoryApiClient = this.YnabApiClient.V1.Budgets[budgetId].Categories[categoryId];
+        _ynabV1CategoryApiClient = YnabApiClient.V1.Budgets[budgetId].Categories[categoryId];
     }
 
     [Fact(DisplayName = "Get Category")]
@@ -32,7 +32,7 @@ public sealed class YnabV1CategoryApiClientTests :
     [Fact(DisplayName = "Update Category")]
     public async Task UpdateAsync_ShouldSucceed()
     {
-        var saveCategory = this.Faker.Generate<SaveCategory>();
+        var saveCategory = Faker.Generate<SaveCategory>();
 
         var saveCategoryResponse = await _ynabV1CategoryApiClient.UpdateAsync(saveCategory);
 

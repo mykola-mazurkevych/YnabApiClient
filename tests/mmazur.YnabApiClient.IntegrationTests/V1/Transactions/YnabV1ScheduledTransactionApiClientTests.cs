@@ -21,7 +21,7 @@ public sealed class YnabV1ScheduledTransactionApiClientTests :
         var budgetId = _faker.Generate<Guid>();
         var scheduledTransactionId = _faker.Generate<Guid>();
 
-        _ynabV1ScheduledTransactionApiClient = this.YnabApiClient.V1.Budgets[budgetId].ScheduledTransactions[scheduledTransactionId];
+        _ynabV1ScheduledTransactionApiClient = YnabApiClient.V1.Budgets[budgetId].ScheduledTransactions[scheduledTransactionId];
     }
 
     [Fact(DisplayName = "Get Scheduled Transaction")]

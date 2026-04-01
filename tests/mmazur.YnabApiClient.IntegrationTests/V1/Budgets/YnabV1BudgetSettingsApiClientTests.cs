@@ -13,9 +13,9 @@ public sealed class YnabV1BudgetSettingsApiClientTests :
     public YnabV1BudgetSettingsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1BudgetSettingsApiClient = this.YnabApiClient.V1.Budgets[budgetId].Settings;
+        _ynabV1BudgetSettingsApiClient = YnabApiClient.V1.Budgets[budgetId].Settings;
     }
 
     [Fact(DisplayName = "Get Budget Settings")]

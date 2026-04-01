@@ -13,7 +13,7 @@ public sealed class YnabV1UserApiClientTests :
     public YnabV1UserApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        _ynabV1UserApiClient = this.YnabApiClient.V1.User;
+        _ynabV1UserApiClient = YnabApiClient.V1.User;
     }
 
     [Fact(DisplayName = "Get User")]

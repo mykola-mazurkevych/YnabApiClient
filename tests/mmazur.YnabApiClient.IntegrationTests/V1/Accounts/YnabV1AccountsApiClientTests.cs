@@ -15,9 +15,9 @@ public sealed class YnabV1AccountsApiClientTests :
     public YnabV1AccountsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1AccountsApiClient = this.YnabApiClient.V1.Budgets[budgetId].Accounts;
+        _ynabV1AccountsApiClient = YnabApiClient.V1.Budgets[budgetId].Accounts;
     }
 
     [Fact(DisplayName = "Get Account")]
@@ -43,7 +43,7 @@ public sealed class YnabV1AccountsApiClientTests :
     [Fact(DisplayName = "Create Account")]
     public async Task CreateAsync_ShouldSucceed()
     {
-        var saveAccount = this.Faker.Generate<SaveAccount>();
+        var saveAccount = Faker.Generate<SaveAccount>();
 
         var accountResponse = await _ynabV1AccountsApiClient.CreateAsync(saveAccount);
 

@@ -14,10 +14,10 @@ public sealed class YnabV1MonthApiClientTests :
     public YnabV1MonthApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
-        var month = this.Faker.Generate<DateOnly>();
+        var budgetId = Faker.Generate<Guid>();
+        var month = Faker.Generate<DateOnly>();
 
-        _ynabV1MonthApiClient = this.YnabApiClient.V1.Budgets[budgetId].Months[month];
+        _ynabV1MonthApiClient = YnabApiClient.V1.Budgets[budgetId].Months[month];
     }
 
     [Fact(DisplayName = "Get Month")]
@@ -32,7 +32,7 @@ public sealed class YnabV1MonthApiClientTests :
     [Fact(DisplayName = "Get Month Category")]
     public async Task Category_GetAsync_ShouldSucceed()
     {
-        var categoryId = this.Faker.Generate<Guid>();
+        var categoryId = Faker.Generate<Guid>();
 
         var categoryResponse = await _ynabV1MonthApiClient.Categories[categoryId].GetAsync();
 
@@ -43,8 +43,8 @@ public sealed class YnabV1MonthApiClientTests :
     [Fact(DisplayName = "Update Month Category")]
     public async Task Category_UpdateAsync_ShouldSucceed()
     {
-        var categoryId = this.Faker.Generate<Guid>();
-        var saveMonthCategory = this.Faker.Generate<SaveMonthCategory>();
+        var categoryId = Faker.Generate<Guid>();
+        var saveMonthCategory = Faker.Generate<SaveMonthCategory>();
 
         var saveCategoryResponse = await _ynabV1MonthApiClient.Categories[categoryId].UpdateAsync(saveMonthCategory);
 

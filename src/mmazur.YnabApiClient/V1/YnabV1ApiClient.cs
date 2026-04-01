@@ -5,11 +5,11 @@ using mmazur.YnabApiClient.V1.Users;
 
 namespace mmazur.YnabApiClient.V1;
 
-internal sealed class YnabV1ApiClient(IHttpClientFactory httpClientFactory, ILogger? logger, Uri baseUri, string bearerToken) :
+internal sealed class YnabV1ApiClient(HttpClient httpClient, ILogger? logger) :
     IYnabV1ApiClient
 {
-    private readonly Uri _baseUri = new(baseUri, "v1/");
+    private readonly Uri _baseUri = new("v1/", UriKind.Relative);
 
-    public IYnabV1BudgetsApiClient Budgets => new YnabV1BudgetsApiClient(httpClientFactory, logger, _baseUri, bearerToken);
-    public IYnabV1UserApiClient User => new YnabV1UserApiClient(httpClientFactory, logger, _baseUri, bearerToken);
+    public IYnabV1BudgetsApiClient Budgets => new YnabV1BudgetsApiClient(httpClient, _baseUri, logger);
+    public IYnabV1UserApiClient User => new YnabV1UserApiClient(httpClient, _baseUri, logger);
 }

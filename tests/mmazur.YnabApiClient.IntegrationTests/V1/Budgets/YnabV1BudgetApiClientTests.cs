@@ -15,11 +15,11 @@ public sealed class YnabV1BudgetApiClientTests :
     public YnabV1BudgetApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1BudgetApiClient = this.YnabApiClient.V1.Budgets[budgetId];
-        _ynabV1DefaultBudgetApiClient = this.YnabApiClient.V1.Budgets.Default;
-        _ynabV1LastUsedBudgetApiClient = this.YnabApiClient.V1.Budgets.LastUsed;
+        _ynabV1BudgetApiClient = YnabApiClient.V1.Budgets[budgetId];
+        _ynabV1DefaultBudgetApiClient = YnabApiClient.V1.Budgets.Default;
+        _ynabV1LastUsedBudgetApiClient = YnabApiClient.V1.Budgets.LastUsed;
     }
 
     [Fact(DisplayName = "Get Budget")]

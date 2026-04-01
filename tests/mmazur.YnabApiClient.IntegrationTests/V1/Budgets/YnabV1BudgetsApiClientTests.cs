@@ -13,7 +13,7 @@ public sealed class YnabV1BudgetsApiClientTests :
     public YnabV1BudgetsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        _ynabV1BudgetsApiClient = this.YnabApiClient.V1.Budgets;
+        _ynabV1BudgetsApiClient = YnabApiClient.V1.Budgets;
     }
 
     [Fact(DisplayName = "Get Budgets")]
@@ -28,7 +28,7 @@ public sealed class YnabV1BudgetsApiClientTests :
     [Fact(DisplayName = "Get Budgets with Include Accounts")]
     public async Task GetAsync_WithIncludeAccounts_ShouldSucceed()
     {
-        var includeAccounts = this.Faker.Generate<bool>();
+        var includeAccounts = Faker.Generate<bool>();
 
         var budgetSummaryResponse = await _ynabV1BudgetsApiClient.GetAsync(includeAccounts);
 

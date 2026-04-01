@@ -14,9 +14,9 @@ public sealed class YnabV1TransactionsApiClientTests :
     public YnabV1TransactionsApiClientTests(YnabApiClientTestsFixture fixture, ITestOutputHelper outputHelper) :
         base(fixture, outputHelper)
     {
-        var budgetId = this.Faker.Generate<Guid>();
+        var budgetId = Faker.Generate<Guid>();
 
-        _ynabV1TransactionsApiClient = this.YnabApiClient.V1.Budgets[budgetId].Transactions;
+        _ynabV1TransactionsApiClient = YnabApiClient.V1.Budgets[budgetId].Transactions;
     }
 
     [Fact(DisplayName = "Get Transactions")]
@@ -113,7 +113,7 @@ public sealed class YnabV1TransactionsApiClientTests :
     [Fact(DisplayName = "Create Transaction")]
     public async Task CreateAsync_ShouldSucceed()
     {
-        var newTransaction = this.Faker.Generate<NewTransaction>();
+        var newTransaction = Faker.Generate<NewTransaction>();
 
         var saveTransactionResponse = await _ynabV1TransactionsApiClient.CreateAsync(newTransaction);
 
@@ -124,7 +124,7 @@ public sealed class YnabV1TransactionsApiClientTests :
     [Fact(DisplayName = "Create Multiple Transactions")]
     public async Task CreateAsync_MultipleTransactions_ShouldSucceed()
     {
-        var newTransactions = this.Faker.Generate<NewTransaction>(3);
+        var newTransactions = Faker.Generate<NewTransaction>(3);
 
         var saveTransactionsResponse = await _ynabV1TransactionsApiClient.CreateAsync(newTransactions);
 
@@ -135,7 +135,7 @@ public sealed class YnabV1TransactionsApiClientTests :
     [Fact(DisplayName = "Update Transaction")]
     public async Task UpdateAsync_ShouldSucceed()
     {
-        var saveTransaction = this.Faker.Generate<SaveTransactionWithIdOrImportId>();
+        var saveTransaction = Faker.Generate<SaveTransactionWithIdOrImportId>();
 
         var saveTransactionResponse = await _ynabV1TransactionsApiClient.UpdateAsync(saveTransaction);
 
@@ -146,7 +146,7 @@ public sealed class YnabV1TransactionsApiClientTests :
     [Fact(DisplayName = "Update Multiple Transactions")]
     public async Task UpdateAsync_MultipleTransactions_ShouldSucceed()
     {
-        var saveTransactions = this.Faker.Generate<SaveTransactionWithIdOrImportId>(3);
+        var saveTransactions = Faker.Generate<SaveTransactionWithIdOrImportId>(3);
 
         var saveTransactionsResponse = await _ynabV1TransactionsApiClient.UpdateAsync(saveTransactions);
 

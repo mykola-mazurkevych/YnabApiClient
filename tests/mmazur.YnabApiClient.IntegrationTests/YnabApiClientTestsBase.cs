@@ -23,7 +23,7 @@ public abstract class YnabApiClientTestsBase : IClassFixture<YnabApiClientTestsF
             .AddYnabApiClient(new YnabApiClientOptions { BaseUri = fixture.BaseUri, BearerToken = "test" })
             .BuildServiceProvider();
 
-        this.YnabApiClient = serviceProvider.GetRequiredService<IYnabApiClient>();
+        YnabApiClient = serviceProvider.GetRequiredService<IYnabApiClient>();
     }
 
     protected AutoFaker Faker { get; } = new();

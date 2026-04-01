@@ -1,9 +1,7 @@
-﻿#pragma warning disable CA1848 // Use the LoggerMessage delegates
-#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-#pragma warning disable IDE0010 // Add missing cases
+﻿#pragma warning disable IDE0010 // Add missing cases
 
 using System.Net;
-using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -18,10 +16,8 @@ using mmazur.YnabApiClient.V1.Exceptions;
 
 namespace mmazur.YnabApiClient.V1.Common;
 
-internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, ILogger? logger)
+internal abstract class YnabApiClientBase(HttpClient httpClient, ILogger? logger)
 {
-    private const string JsonContentType = "application/json";
-
     private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
         Converters =
@@ -32,53 +28,49 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
         WriteIndented = true
     };
 
-    protected Task<TData?> GetAsync<TData>(Uri uri, string bearerToken, CancellationToken cancellationToken)
+    protected Task<TData?> GetAsync<TData>(Uri uri, CancellationToken cancellationToken)
         where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Get, uri, queryParameters: null, content: null, bearerToken, cancellationToken);
+        SendAsync<TData>(HttpMethod.Get, uri, queryParameters: null, content: null, cancellationToken);
 
-    protected Task<TData?> GetAsync<TData>(Uri uri, object? queryParameters, string bearerToken, CancellationToken cancellationToken)
+    protected Task<TData?> GetAsync<TData>(Uri uri, object? queryParameters, CancellationToken cancellationToken)
         where TData : class =>
-        this.SendAsync<TData>(HttpMethod.Get, uri, queryParameters, content: null, bearerToken, cancellationToken);
+        SendAsync<TData>(HttpMethod.Get, uri, queryParameters, content: null, cancellationToken);
 
-    protected async Task<TData> PostAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
+    protected async Task<TData> PostAsync<TData>(Uri uri, object content, CancellationToken cancellationToken)
         where TData : class
     {
-        var data = await this.SendAsync<TData>(HttpMethod.Post, uri, queryParameters: null, content: content, bearerToken, cancellationToken).ConfigureAwait(false);
+        var data = await SendAsync<TData>(HttpMethod.Post, uri, queryParameters: null, content: content, cancellationToken).ConfigureAwait(false);
 
         return data ?? throw new InvalidOperationException($"The {HttpMethod.Post} should not return null data.");
     }
 
-    protected async Task<TData> PatchAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
+    protected async Task<TData> PatchAsync<TData>(Uri uri, object content, CancellationToken cancellationToken)
         where TData : class
     {
-        var data = await this.SendAsync<TData>(HttpMethod.Patch, uri, queryParameters: null, content: content, bearerToken, cancellationToken).ConfigureAwait(false);
+        var data = await SendAsync<TData>(HttpMethod.Patch, uri, queryParameters: null, content: content, cancellationToken).ConfigureAwait(false);
 
         return data ?? throw new InvalidOperationException($"The {HttpMethod.Patch} should not return null data.");
     }
 
-    protected async Task<TData> PutAsync<TData>(Uri uri, object content, string bearerToken, CancellationToken cancellationToken)
+    protected async Task<TData> PutAsync<TData>(Uri uri, object content, CancellationToken cancellationToken)
         where TData : class
     {
-        var data = await this.SendAsync<TData>(HttpMethod.Put, uri, queryParameters: null, content: content, bearerToken, cancellationToken).ConfigureAwait(false);
+        var data = await SendAsync<TData>(HttpMethod.Put, uri, queryParameters: null, content: content, cancellationToken).ConfigureAwait(false);
 
         return data ?? throw new InvalidOperationException($"The {HttpMethod.Put} should not return null data.");
     }
 
-    protected async Task<TData> DeleteAsync<TData>(Uri uri, string bearerToken, CancellationToken cancellationToken)
+    protected async Task<TData> DeleteAsync<TData>(Uri uri, CancellationToken cancellationToken)
         where TData : class
     {
-        var data = await this.SendAsync<TData>(HttpMethod.Delete, uri, queryParameters: null, content: null, bearerToken, cancellationToken).ConfigureAwait(false);
+        var data = await SendAsync<TData>(HttpMethod.Delete, uri, queryParameters: null, content: null, cancellationToken).ConfigureAwait(false);
 
         return data ?? throw new InvalidOperationException($"The {HttpMethod.Delete} should not return null data.");
     }
 
-    private async Task<TData?> SendAsync<TData>(HttpMethod httpMethod, Uri uri, object? queryParameters, object? content, string bearerToken, CancellationToken cancellationToken)
+    private async Task<TData?> SendAsync<TData>(HttpMethod httpMethod, Uri uri, object? queryParameters, object? content, CancellationToken cancellationToken)
         where TData : class
     {
-        using var httpClient = httpClientFactory.CreateClient();
-        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
-        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
-
         var requestUri = uri.AppendQueryParameters(queryParameters);
 
         using var httpRequestMessage = new HttpRequestMessage(httpMethod, requestUri);
@@ -97,7 +89,7 @@ internal abstract class YnabApiClientBase(IHttpClientFactory httpClientFactory, 
                 YnabApiClientBaseLogMessages.Content(logger, jsonContent);
             }
 
-            httpRequestMessage.Content = new StringContent(jsonContent, Encoding.UTF8, JsonContentType);
+            httpRequestMessage.Content = new StringContent(jsonContent, Encoding.UTF8, MediaTypeNames.Application.Json);
         }
 
         using var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage, cancellationToken).ConfigureAwait(false);
