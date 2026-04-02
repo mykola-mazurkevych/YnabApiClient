@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Transactions.Models;
 
@@ -11,10 +9,9 @@ public sealed record ScheduledTransactionsResponse
     {
     }
 
-    [JsonInclude]
     [JsonPropertyName("scheduled_transactions")]
     [JsonRequired]
-    private List<ScheduledTransactionDetail> _scheduledTransactions = [];
+    public IReadOnlyList<ScheduledTransactionDetail> ScheduledTransactions { get; init; } = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -23,6 +20,4 @@ public sealed record ScheduledTransactionsResponse
     [JsonRequired]
     public required long ServerKnowledge { get; init; }
 
-    [JsonIgnore]
-    public IReadOnlyList<ScheduledTransactionDetail> ScheduledTransactions => _scheduledTransactions.AsReadOnly();
 }

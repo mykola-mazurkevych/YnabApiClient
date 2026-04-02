@@ -23,9 +23,8 @@ internal abstract class YnabApiClientBase(HttpClient httpClient, ILogger? logger
         Converters =
         {
             new DecimalJsonConverter(),
-            new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+            new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
         },
-        WriteIndented = true
     };
 
     protected Task<TData?> GetAsync<TData>(Uri uri, CancellationToken cancellationToken)
@@ -84,7 +83,7 @@ internal abstract class YnabApiClientBase(HttpClient httpClient, ILogger? logger
         {
             var jsonContent = JsonSerializer.Serialize(content, JsonSerializerOptions);
 
-            if (logger is not null)
+            if (logger is not null && logger.IsEnabled(LogLevel.Debug))
             {
                 YnabApiClientBaseLogMessages.Content(logger, jsonContent);
             }
@@ -103,11 +102,10 @@ internal abstract class YnabApiClientBase(HttpClient httpClient, ILogger? logger
 
         var jsonNode = await JsonNode.ParseAsync(responseContent, cancellationToken: cancellationToken).ConfigureAwait(false);
 
-        if (logger?.IsEnabled(LogLevel.Debug) == true)
+        if (logger is not null && logger.IsEnabled(LogLevel.Debug))
         {
-            var responseContentJson = jsonNode?.ToJsonString(JsonSerializerOptions);
-
-            YnabApiClientBaseLogMessages.Content(logger, responseContentJson);
+            var loggerResponseContent = jsonNode?.ToJsonString(JsonSerializerOptions);
+            YnabApiClientBaseLogMessages.Content(logger, loggerResponseContent);
         }
 
         switch (httpResponseMessage.StatusCode)
@@ -117,14 +115,12 @@ internal abstract class YnabApiClientBase(HttpClient httpClient, ILogger? logger
             case (HttpStatusCode)209:
                 var dataResponse = jsonNode.Deserialize<DataResponse<TData>>(JsonSerializerOptions) ??
                                    throw new InvalidOperationException("Deserialized response is null.");
-
                 return dataResponse.Data;
             case HttpStatusCode.NotFound:
                 return null;
             default:
                 var errorResponse = jsonNode.Deserialize<ErrorResponse>(JsonSerializerOptions) ??
                                     throw new InvalidOperationException("Deserialized response is null.");
-
                 throw new YnabApiClientException(errorResponse.Error.Id, errorResponse.Error.Name, errorResponse.Error.Detail);
         }
     }

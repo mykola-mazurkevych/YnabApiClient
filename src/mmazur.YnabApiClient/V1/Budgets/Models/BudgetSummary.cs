@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 using mmazur.YnabApiClient.V1.Accounts.Models;
 
@@ -11,9 +9,8 @@ public sealed record BudgetSummary
     /// <summary>
     /// The budget accounts (only included if include_accounts=true specified as query parameter)
     /// </summary>
-    [JsonInclude]
     [JsonPropertyName("accounts")]
-    private List<Account> _accounts = [];
+    public IReadOnlyList<Account> Accounts { get; init; } = [];
 
     [JsonPropertyName("id")]
     [JsonRequired]
@@ -47,6 +44,4 @@ public sealed record BudgetSummary
     [JsonPropertyName("currency_format")]
     public CurrencyFormat? CurrencyFormat { get; init; }
 
-    [JsonIgnore]
-    public IReadOnlyList<Account> Accounts => _accounts.AsReadOnly();
 }

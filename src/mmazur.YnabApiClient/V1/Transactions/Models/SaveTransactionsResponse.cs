@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Transactions.Models;
 
@@ -11,19 +9,16 @@ public sealed record SaveTransactionsResponse
     {
     }
 
-    [JsonInclude]
     [JsonPropertyName("transaction_ids")]
     [JsonRequired]
-    private List<string> _transactionIds = [];
+    public IReadOnlyList<string> TransactionIds { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("transactions")]
     [JsonRequired]
-    private List<TransactionDetail> _transactions = [];
+    public IReadOnlyList<TransactionDetail> Transactions { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("duplicate_import_ids")]
-    private List<string> _duplicateImportIds = [];
+    public IReadOnlyList<string> DuplicateImportIds { get; init; } = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -32,12 +27,4 @@ public sealed record SaveTransactionsResponse
     [JsonRequired]
     public required long ServerKnowledge { get; init; }
 
-    [JsonIgnore]
-    public IReadOnlyList<string> TransactionIds => _transactionIds.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<TransactionDetail> Transactions => _transactions.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<string> DuplicateImportIds => _duplicateImportIds.AsReadOnly();
 }

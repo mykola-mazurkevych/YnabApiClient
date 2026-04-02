@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Months.Models;
 
@@ -11,10 +9,9 @@ public sealed record MonthSummariesResponse
     {
     }
 
-    [JsonInclude]
     [JsonPropertyName("months")]
     [JsonRequired]
-    private List<MonthSummary> _months = [];
+    public IReadOnlyList<MonthSummary> Months { get; init; } = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -22,7 +19,4 @@ public sealed record MonthSummariesResponse
     [JsonPropertyName("server_knowledge")]
     [JsonRequired]
     public required long ServerKnowledge { get; init; }
-
-    [JsonIgnore]
-    public IReadOnlyList<MonthSummary> Months => _months.AsReadOnly();
 }

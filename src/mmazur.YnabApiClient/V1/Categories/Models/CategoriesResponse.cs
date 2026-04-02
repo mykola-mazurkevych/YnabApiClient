@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Categories.Models;
 
@@ -11,10 +9,9 @@ public sealed record CategoriesResponse
     {
     }
 
-    [JsonInclude]
     [JsonPropertyName("category_groups")]
     [JsonRequired]
-    private List<CategoryGroupWithCategories> _categoryGroups = [];
+    public IReadOnlyList<CategoryGroupWithCategories> CategoryGroups { get; init; } = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -22,7 +19,4 @@ public sealed record CategoriesResponse
     [JsonPropertyName("server_knowledge")]
     [JsonRequired]
     public required long ServerKnowledge { get; init; }
-
-    [JsonIgnore]
-    public IReadOnlyList<CategoryGroupWithCategories> CategoryGroups => _categoryGroups.AsReadOnly();
 }

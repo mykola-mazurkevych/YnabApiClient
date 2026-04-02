@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Transactions.Models;
 
@@ -9,9 +7,8 @@ public sealed record ScheduledTransactionDetail
     /// <summary>
     /// If a split scheduled transaction, the subtransactions
     /// </summary>
-    [JsonInclude]
     [JsonPropertyName("subtransactions")]
-    private List<ScheduledSubTransaction> _scheduledSubTransactions = [];
+    public IReadOnlyList<ScheduledSubTransaction> ScheduledSubTransactions { get; init; } = [];
 
     [JsonPropertyName("id")]
     [JsonRequired]
@@ -93,6 +90,4 @@ public sealed record ScheduledTransactionDetail
     [JsonRequired]
     public required bool Deleted { get; init; }
 
-    [JsonIgnore]
-    public IReadOnlyList<ScheduledSubTransaction> ScheduledSubTransactions => _scheduledSubTransactions.AsReadOnly();
 }

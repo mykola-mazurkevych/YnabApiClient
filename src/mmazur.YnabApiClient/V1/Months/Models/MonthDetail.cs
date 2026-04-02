@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 using mmazur.YnabApiClient.V1.Categories.Models;
 
@@ -11,10 +9,9 @@ public sealed record MonthDetail
     /// <summary>
     /// The budget month categories. Amounts (budgeted, activity, balance, etc.) are specific to the {month} parameter specified
     /// </summary>
-    [JsonInclude]
     [JsonPropertyName("categories")]
     [JsonRequired]
-    private List<Category> _categories = [];
+    public IReadOnlyList<Category> Categories { get; init; } = [];
 
     [JsonPropertyName("month")]
     [JsonRequired]
@@ -63,7 +60,4 @@ public sealed record MonthDetail
     [JsonPropertyName("deleted")]
     [JsonRequired]
     public required bool Deleted { get; init; }
-
-    [JsonIgnore]
-    public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
 }

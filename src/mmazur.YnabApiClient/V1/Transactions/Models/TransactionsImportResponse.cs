@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Transactions.Models;
 
@@ -14,11 +12,7 @@ public sealed record TransactionsImportResponse
     /// <summary>
     /// The list of transaction ids that were imported.
     /// </summary>
-    [JsonInclude]
     [JsonPropertyName("transaction_ids")]
     [JsonRequired]
-    private List<string> _transactionIds = [];
-
-    [JsonIgnore]
-    public IReadOnlyList<string> TransactionIds => _transactionIds.AsReadOnly();
+    public IReadOnlyList<string> TransactionIds { get; init; } = [];
 }

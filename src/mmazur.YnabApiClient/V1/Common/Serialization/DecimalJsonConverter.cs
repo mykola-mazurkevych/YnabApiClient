@@ -11,5 +11,5 @@ internal sealed class DecimalJsonConverter : JsonConverter<decimal>
         reader.GetDecimal() / Multiplier;
 
     public override void Write(Utf8JsonWriter writer, decimal value, JsonSerializerOptions options) =>
-        writer.WriteNumberValue((long)(value * Multiplier));
+        writer.WriteNumberValue((long)Math.Round(value * Multiplier, MidpointRounding.AwayFromZero));
 }

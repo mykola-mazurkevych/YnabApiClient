@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace mmazur.YnabApiClient.V1.Accounts.Models;
 
@@ -11,10 +9,9 @@ public sealed record AccountsResponse
     {
     }
 
-    [JsonInclude]
     [JsonPropertyName("accounts")]
     [JsonRequired]
-    private List<Account> _accounts = [];
+    public IReadOnlyList<Account> Accounts { get; init; } = [];
 
     /// <summary>
     /// The knowledge of the server
@@ -22,7 +19,4 @@ public sealed record AccountsResponse
     [JsonPropertyName("server_knowledge")]
     [JsonRequired]
     public required long ServerKnowledge { get; init; }
-
-    [JsonIgnore]
-    public IReadOnlyList<Account> Accounts => _accounts.AsReadOnly();
 }

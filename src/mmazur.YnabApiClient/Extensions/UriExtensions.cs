@@ -1,11 +1,16 @@
 ﻿using System.Globalization;
+using System.Reflection;
 using System.Web;
+using System.Collections.Concurrent;
 
 namespace mmazur.YnabApiClient.Extensions;
 
 internal static class UriExtensions
 {
+    private const string DateOnlyFormat = "yyyy-MM-dd";
+
     private static readonly TextInfo TextInfo = CultureInfo.InvariantCulture.TextInfo;
+    private static readonly ConcurrentDictionary<Type, PropertyInfo[]> QueryParameterPropertiesCache = new();
 
     extension(Uri uri)
     {
@@ -26,23 +31,29 @@ internal static class UriExtensions
                 : uri.OriginalString[(uri.OriginalString.IndexOf('?', StringComparison.Ordinal) + 1)..];
             var nameValueCollection = HttpUtility.ParseQueryString(query);
 
-            foreach (var propertyInfo in queryParameters.GetType().GetProperties())
+            var propertyInfos = QueryParameterPropertiesCache.GetOrAdd(
+                queryParameters.GetType(),
+                static type => type.GetProperties(BindingFlags.Instance | BindingFlags.Public));
+
+            foreach (var propertyInfo in propertyInfos)
             {
                 var value = propertyInfo.GetValue(queryParameters);
 
-                nameValueCollection[propertyInfo.Name] = value is bool boolValue
-                    ? TextInfo.ToLower(boolValue.ToString())
-                    : value?.ToString();
+                nameValueCollection[propertyInfo.Name] =
+                    value switch
+                    {
+                        null => null,
+                        bool boolValue => TextInfo.ToLower(boolValue.ToString()),
+                        DateOnly dateOnlyValue => dateOnlyValue.ToString(DateOnlyFormat, CultureInfo.InvariantCulture),
+                        _ => value.ToString()
+                    };
             }
 
             var queryString = nameValueCollection.ToString();
 
             if (uri.IsAbsoluteUri)
             {
-                var uriBuilder = new UriBuilder(uri)
-                {
-                    Query = queryString
-                };
+                var uriBuilder = new UriBuilder(uri) { Query = queryString };
 
                 return uriBuilder.Uri;
             }

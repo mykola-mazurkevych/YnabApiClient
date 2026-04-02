@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0044 // Add readonly modifier
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 using mmazur.YnabApiClient.V1.Accounts.Models;
 using mmazur.YnabApiClient.V1.Categories.Models;
@@ -13,45 +11,35 @@ namespace mmazur.YnabApiClient.V1.Budgets.Models;
 
 public sealed record BudgetDetail
 {
-    [JsonInclude]
     [JsonPropertyName("accounts")]
-    private List<Account> _accounts = [];
+    public IReadOnlyList<Account> Accounts { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("payees")]
-    private List<Payee> _payees = [];
+    public IReadOnlyList<Payee> Payees { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("payee_locations")]
-    private List<PayeeLocation> _payeeLocations = [];
+    public IReadOnlyList<PayeeLocation> PayeeLocations { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("category_groups")]
-    private List<CategoryGroup> _categoryGroups = [];
+    public IReadOnlyList<CategoryGroup> CategoryGroups { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("categories")]
-    private List<Category> _categories = [];
+    public IReadOnlyList<Category> Categories { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("months")]
-    private List<MonthDetail> _months = [];
+    public IReadOnlyList<MonthDetail> Months { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("transactions")]
-    private List<TransactionSummary> _transactions = [];
+    public IReadOnlyList<TransactionSummary> Transactions { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("subtransactions")]
-    private List<SubTransaction> _subTransactions = [];
+    public IReadOnlyList<SubTransaction> SubTransactions { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("scheduled_transactions")]
-    private List<ScheduledTransactionSummary> _scheduledTransactions = [];
+    public IReadOnlyList<ScheduledTransactionSummary> ScheduledTransactions { get; init; } = [];
 
-    [JsonInclude]
     [JsonPropertyName("scheduled_subtransactions")]
-    private List<ScheduledSubTransaction> _scheduledSubTransactions = [];
+    public IReadOnlyList<ScheduledSubTransaction> ScheduledSubTransactions { get; init; } = [];
 
     [JsonPropertyName("id")]
     [JsonRequired]
@@ -76,33 +64,4 @@ public sealed record BudgetDetail
     [JsonPropertyName("currency_format")]
     public CurrencyFormat? CurrencyFormat { get; init; }
 
-    [JsonIgnore]
-    public IReadOnlyList<Account> Accounts => _accounts.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<Payee> Payees => _payees.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<PayeeLocation> PayeeLocations => _payeeLocations.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<CategoryGroup> CategoryGroups => _categoryGroups.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<MonthDetail> Months => _months.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<TransactionSummary> Transactions => _transactions.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<SubTransaction> SubTransactions => _subTransactions.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<ScheduledTransactionSummary> ScheduledTransactions => _scheduledTransactions.AsReadOnly();
-
-    [JsonIgnore]
-    public IReadOnlyList<ScheduledSubTransaction> ScheduledSubTransactions => _scheduledSubTransactions.AsReadOnly();
 }

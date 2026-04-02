@@ -42,7 +42,7 @@ internal sealed class YnabV1TransactionsApiClient(HttpClient httpClient, Uri par
         GetAsync<TransactionsResponse>(_resourcesUri, new { last_knowledge_of_server = lastKnowledgeOfServer }, cancellationToken);
 
     public Task<SaveTransactionResponse> CreateAsync(NewTransaction transaction, CancellationToken cancellationToken = default) =>
-        PostAsync<SaveTransactionResponse>(_resourcesUri, new PostTransactionsWrapper { Transaction = transaction }, cancellationToken);
+        PostAsync<SaveTransactionResponse>(_resourcesUri, new PostTransactionWrapper { Transaction = transaction }, cancellationToken);
 
     public Task<SaveTransactionsResponse> CreateAsync(IEnumerable<NewTransaction> transactions, CancellationToken cancellationToken = default) =>
         PostAsync<SaveTransactionsResponse>(_resourcesUri, new PostTransactionsWrapper { Transactions = transactions }, cancellationToken);
